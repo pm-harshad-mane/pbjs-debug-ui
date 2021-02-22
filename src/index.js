@@ -1,17 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import App from './App/App';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+document.addEventListener("DOMContentLoaded", function(){
+	const APP_UI_DIV_ID = "pbjs-debug-ui";
+	const PBJS_NAMESPACE = window.PBJS_NAMESPACE || "pbjs";
+	let div = document.createElement('div');
+	div.id = APP_UI_DIV_ID;
+	document.body.appendChild(div);
+	// ToDo: fix the strictmode issue: refer: https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+	// ReactDOM.render(
+	//   <React.StrictMode>
+	//     <App pbjsNamespace={PBJS_NAMESPACE} />
+	//   </React.StrictMode>,
+	//   document.getElementById(APP_UI_DIV_ID)
+	// );
+	
+	ReactDOM.render(
+	  <div>
+	    <App pbjsNamespace={PBJS_NAMESPACE} />
+	  </div>,
+	  document.getElementById(APP_UI_DIV_ID)
+	);
+});
+

@@ -1,0 +1,73 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+// import AccUI from './AccUI';
+import Config from './Config';
+import AdUnits from './AdUnits';
+
+// ToDo:
+// check hard-coded ids
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  summary: {
+  	backgroundColor: '#1976d2'
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0,
+    fontWeight: 'bolder',
+    color: 'white'
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    // color: theme.palette.text.secondary,
+    color: 'white'
+  },
+  accordionDetails: {
+    padding: '0px',
+    overflow: 'scroll'
+  }
+}));
+
+export default function ControlledAccordions(props) {
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+  const {pbjsNamespace} = props;
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  return (
+    <div className={classes.root}>
+
+      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
+          className={classes.summary}
+        >
+          <Typography className={classes.heading}>PrebidJS Debug UI</Typography>
+          <Typography className={classes.secondaryHeading}></Typography>
+        </AccordionSummary>
+        <AccordionDetails className={classes.accordionDetails}>
+          <div className={classes.root}>
+          <Config pbjsNamespace={pbjsNamespace} />          
+          <AdUnits pbjsNamespace={pbjsNamespace} />
+          </div>
+
+        </AccordionDetails>
+      </Accordion>
+
+      </div>
+      )
+  }

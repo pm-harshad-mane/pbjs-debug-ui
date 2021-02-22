@@ -1,0 +1,43 @@
+TODO:
+
+expandable accordion like componenet
+- Option: expand collapse
+- Option: Load the data on expand or directly
+-- Load mask while data is loading
+- Option: If data is loaded once then do not load it again on expand
+- Option: Refresh data on refresh icon click 
+- Option: Search
+
+Main Accordion
+- should become smaller in width when minimized
+- scrollable view
+
+Data to show
+- Version
+- Currency
+- Bidders
+- Modules
+- Analytics adapters
+- UserId Modules
+- Available User Ids
+-- Generated User IDs (Note: these may not be same as those passed before auction)
+- Config
+-- user friendly presentation
+-- raw json option
+- Schain config
+-- global
+-- bidder-specific
+- AdUnits
+-- config
+-- MediaTypes
+-- Bidders
+-- Bids
+-- Latency
+-- winning bid
+-- Rendered Bid
+-- From Cache?
+-- Key Value targeting
+-- View the slot on page
+-- Post timeout?
+- AdServerTargeting
+-- refresh button
