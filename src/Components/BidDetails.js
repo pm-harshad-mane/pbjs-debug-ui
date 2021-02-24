@@ -12,17 +12,38 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import {TabPanel, a11yProps} from './TabPanel'
+
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+var beautify_html = require('js-beautify').html;
 
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
       borderBottom: 'unset',
     },
+
+    '& SyntaxHighlighter': {
+      width: '100%'
+    }
   },
+  tabPanelRoot: {
+    flex: 1,
+    width: '100%',
+    '& .MuiTab-root': {
+      padding: '0px'
+    }
+  },
+  editor: {
+    width: '100%',
+    overflow: 'scroll'
+  }
 });
 
 function createData(name, calories, fat, carbs, protein, price) {
@@ -43,7 +64,12 @@ function createData(name, calories, fat, carbs, protein, price) {
 function Row(props) {
   const { row } = props; // row ==> bid
   const [open, setOpen] = React.useState(false);
+  // const [ ad, setAd ] = React.useState('');
   const classes = useRowStyles();
+  const [tabValue, setTabValue] = React.useState(0);
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
 
   return (
     <React.Fragment>
@@ -62,40 +88,74 @@ function Row(props) {
         <TableCell align="right">{row.statusMessage}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={10}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
-              <Typography variant="p" gutterBottom component="div">
-                Bid Details:
-                <SyntaxHighlighter language="javascript" style={docco}>
-                  {(JSON.stringify(row, undefined, 4))}
-                </SyntaxHighlighter>
-              </Typography>              
+
+              <Paper square className={classes.tabPanelRoot}>
+                <Tabs
+                  value={tabValue}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  onChange={handleTabChange}
+                  aria-label="disabled tabs example"
+                  variant="fullWidth"
+                >
+                  <Tab label="Bidder Params" {...a11yProps(0)} />
+                  <Tab label="Targeting" {...a11yProps(1)} />
+                  <Tab label="Bid Details" {...a11yProps(2)} />
+                  <Tab label="Ad Creative" {...a11yProps(3)} />
+                </Tabs>
+                <TabPanel value={tabValue} index={0}>
+                  <SyntaxHighlighter language="json" style={docco}>
+                    {(JSON.stringify(row.params, undefined, 4))}
+                  </SyntaxHighlighter>
+                </TabPanel>
+                <TabPanel value={tabValue} index={1}>
+                  <SyntaxHighlighter language="json" style={docco}>
+                    {(JSON.stringify(row.adserverTargeting, undefined, 4))}
+                  </SyntaxHighlighter>
+                </TabPanel>
+                <TabPanel value={tabValue} index={2}>
+                  <SyntaxHighlighter language="json" style={docco}>
+                    {(JSON.stringify((function(){
+                      const rowCopy = Object.assign({}, row);
+                      delete rowCopy.ad;
+                      return rowCopy;
+                    })(), undefined, 4))}
+                  </SyntaxHighlighter>
+                </TabPanel>
+                <TabPanel value={tabValue} index={3}>
+                  <SyntaxHighlighter language="vbscriptHtml" wrapLongLines={true} style={docco}>                    
+                    {beautify_html(row.ad.replace(/></g, '>\n<'))}
+                  </SyntaxHighlighter>
+                </TabPanel>
+              </Paper>                            
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
     </React.Fragment>
   );
-}
-
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
 };
+
+// Row.propTypes = {
+//   row: PropTypes.shape({
+//     calories: PropTypes.number.isRequired,
+//     carbs: PropTypes.number.isRequired,
+//     fat: PropTypes.number.isRequired,
+//     history: PropTypes.arrayOf(
+//       PropTypes.shape({
+//         amount: PropTypes.number.isRequired,
+//         customerId: PropTypes.string.isRequired,
+//         date: PropTypes.string.isRequired,
+//       }),
+//     ).isRequired,
+//     name: PropTypes.string.isRequired,
+//     price: PropTypes.number.isRequired,
+//     protein: PropTypes.number.isRequired,
+//   }).isRequired,
+// };
 
 const rows = [
   createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
