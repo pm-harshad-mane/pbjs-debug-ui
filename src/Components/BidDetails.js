@@ -126,9 +126,11 @@ function Row(props) {
                   </SyntaxHighlighter>
                 </TabPanel>
                 <TabPanel value={tabValue} index={3}>
+                  <Paper square className={classes.tabPanelRoot}>
                   <SyntaxHighlighter language="vbscriptHtml" wrapLongLines={true} style={docco}>                    
                     {beautify_html(row.ad.replace(/></g, '>\n<'))}
                   </SyntaxHighlighter>
+                  </Paper>
                 </TabPanel>
               </Paper>                            
             </Box>
@@ -167,6 +169,8 @@ const rows = [
 
 const tableClasses = makeStyles({
   root: {
+    width: '100%' ,
+    overflow: 'scroll',
     '& .MuiTableCell-root': {
       padding: '0px'
     }
