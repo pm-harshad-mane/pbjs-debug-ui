@@ -94,6 +94,173 @@
                     enabled: true
                   }
                 });
+                pbjs.setConfig({
+                    debug: true,
+                    // consentManagement: {
+                    //     cmpApi: 'iab',
+                    //     timeout: 1000,
+                    //     defaultGdprScope: true
+                    // },
+                    // consentManagement: {
+                    //     cmpApi: 'static',
+                    //     consentData: {
+                    //         consentString: 'BOEFEAyOEFEAyAHABDENAI4AAAB9vABAASA'
+                    //         vendorData: {
+                    //             purposeConsents: {
+                    //                 '1': true
+                    //             }
+                    //         }
+                    //     }
+                    // },
+                    userSync: {
+                        userIds: [
+                        // {
+                        //     name: "pubProvidedId",
+                        //     params: {
+                        //         eids: [{
+                        //             source: "domain.com",
+                        //             uids:[{
+                        //                 id: "value read from cookie or local storage",
+                        //                 atype: 1,
+                        //                 ext: {
+                        //                     stype: "ppuid" // allowable options are sha256email, DMP, ppuid for now
+                        //                 }
+                        //             }]
+                        //         },{
+                        //             source: "3rdpartyprovided.com",
+                        //             uids:[{
+                        //                 id: "value read from cookie or local storage",
+                        //                 atype: 3,
+                        //                 ext: {
+                        //                     stype: "sha256email"
+                        //                 }
+                        //             }]
+                        //         }],
+                        //         // eidsFunction: getHashedEmail // any user defined function that exists in the page
+                        //     }
+                        // },
+                        {
+                            name: "unifiedId",
+                            params: {
+                                partner: "prebid",
+                                url: "http://match.adsrvr.org/track/rid?ttd_pid=prebid&fmt=json"
+                            },
+                            storage: {
+                                type: "html5",
+                                name: "unifiedid",
+                                expires: 30
+                            },
+                        },{
+                            name: "intentIqId",
+                            params: {
+                                partner: 0, //Set your real IntentIQ partner ID here for production.
+                            },
+                            storage: {
+                                type: "cookie",
+                                name: "intentIqId",
+                                expires: 30
+                            },
+                        },
+                        {
+                            name: "id5Id",
+                            params: {
+                                partner: 173 //Set your real ID5 partner ID here for production, please ask for one at http://id5.io/prebid
+                            },
+                            storage: {
+                                type: "cookie",
+                                name: "id5id",
+                                expires: 90,
+                                refreshInSeconds: 8*3600 // Refresh frequency of cookies, defaulting to 'expires'
+                            },
+
+                        }, {
+                            name: "merkleId",
+                            params: {
+                                ptk: '12345678-aaaa-bbbb-cccc-123456789abc', //Set your real merkle partner key here
+                                pubid: 'EXAMPLE' //Set your real merkle publisher id here
+                            },
+                            storage: {
+                                type: "html5",
+                                name: "merkleId",
+                                expires: 30
+                            },
+
+                        },{
+                            name: "parrableId",
+                            params: {
+                                // change to Parrable Partner Client ID(s) you received from the Parrable Partners you are using
+                                partner: '30182847-e426-4ff9-b2b5-9ca1324ea09b'
+                            }
+                        }, {
+                            name: "pubCommonId",
+                            storage: {
+                                type: "cookie",
+                                name: "pubcid",
+                                expires: 365
+                            },
+                            // value: {
+                            //     foo: '9879878907987',
+                            //     bar:'93939'
+                            // }
+                        },  {
+                        name: 'identityLink',
+                        params: {
+                            pid: '14' // Set your real identityLink placement ID here
+                        },
+                        storage: {
+                            type: 'cookie',
+                            name: 'idl_env',
+                            expires: 30
+                        }
+                        },
+                        {
+                        name: "sharedId",
+                        // bidders: ["rubicon", "sampleBidders"], // to allow this ID for specific bidders
+                        params: {
+                            syncTime: 60 // in seconds, default is 24 hours
+                        },
+                        storage: {
+                            type: "cookie",
+                            name: "sharedid",
+                            expires: 28
+                        }
+                        },
+                        {
+                        name: 'lotamePanoramaId'
+                        },
+                        {
+                        name: "liveIntentId",
+                        params: {
+                            publisherId: "9896876"
+                        },
+                        storage: {
+                            type: "cookie",
+                            name: "_li_pbid",
+                            expires: 28
+                        }
+                        },
+                        {
+                            name: "zeotapIdPlus"
+                        },
+                        {
+                            name: 'haloId',
+                            storage: {
+                                type: "cookie",
+                                name: "haloId",
+                                expires: 28
+                            }
+                        },
+                        {
+                            name: "quantcastId"
+                        },
+                        {
+                            name: "criteo"
+                        },
+                        ],
+                        syncDelay: 5000,
+                        auctionDelay: 1000
+                    }
+                });
 
                 // noBid
                 pbjs.onEvent('noBid', function(){
