@@ -11,6 +11,12 @@ import Tab from '@material-ui/core/Tab';
 import {TabPanel, a11yProps} from './TabPanel'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 
 
@@ -41,8 +47,19 @@ const useStyles = makeStyles((theme) => ({
     padding: '0px'
   },
   tabPanelRoot: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+    width: '100%'
+  },
+  tabPanelRootForEditor: {
+    flexGrow: 1,
+    width: '100%',
+    maxHeight: '300px',
+    overflow: 'scroll'
+  },
+  ListItem: {
+      paddingTop: '0px',
+      paddingBottom: '0px'
+    }
 }));
 
 export default function Config(props) {
@@ -97,15 +114,48 @@ export default function Config(props) {
               variant="fullWidth"
             >
               <Tab label="Config" {...a11yProps(0)} />
-              <Tab label="JSON" {...a11yProps(1)} />
+              <Tab label="Raw JSON" {...a11yProps(1)} />
             </Tabs>
-            <TabPanel value={tabValue} index={0}>
-              Item One
+            <TabPanel value={tabValue} index={0}>            
+              <List>
+                <ListItem className={classes.ListItem}>                  
+                  <ListItemText primary="Bidder Timeout" />
+                  <ListItemSecondaryAction>
+                    {pbjsConfig.bidderTimeout}ms
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem className={classes.ListItem}>                  
+                  <ListItemText primary="Bidder Timeout Buffer" />
+                  <ListItemSecondaryAction>
+                    {pbjsConfig.timeoutBuffer}ms
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem className={classes.ListItem}>
+                  <ListItemText primary="Enable Send All Bids" />
+                  <ListItemSecondaryAction>
+                    {pbjsConfig.enableSendAllBids ? 'true' : 'false'}
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem className={classes.ListItem}>
+                  <ListItemText primary="Use Bid Cache" />
+                  <ListItemSecondaryAction>
+                    {pbjsConfig.useBidCache ? 'true' : 'false'}
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem className={classes.ListItem}>                  
+                  <ListItemText primary="Price Granularity" />
+                  <ListItemSecondaryAction>
+                    {pbjsConfig.priceGranularity}
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </List>
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
+              <Paper square className={classes.tabPanelRootForEditor}>
               <SyntaxHighlighter language="javascript" style={docco}>
                 {(JSON.stringify(pbjsConfig, undefined, 4))}
               </SyntaxHighlighter>
+              </Paper>
             </TabPanel>            
           </Paper>
         </AccordionDetails>
