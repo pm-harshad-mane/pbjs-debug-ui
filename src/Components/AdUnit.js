@@ -145,7 +145,6 @@ export default function AdUnit(props) {
               <Tab label="Bids" {...a11yProps(0)} />
               <Tab label="Media Types" {...a11yProps(1)} />
               <Tab label="Bidder Params" {...a11yProps(2)} />
-              <Tab label="AdServer Targeting" {...a11yProps(2)} />
             </Tabs>
 
             <TabPanel value={tabValue} index={0}>
@@ -159,16 +158,11 @@ export default function AdUnit(props) {
             </TabPanel>
               
             <TabPanel value={tabValue} index={2}>
+              These params are passed to bidder:
               <SyntaxHighlighter language="javascript" style={docco}>
                 {(JSON.stringify(pbjsAdUnit.bids, undefined, 4))}
               </SyntaxHighlighter>            
-            </TabPanel>
-
-            <TabPanel value={tabValue} index={3}>
-              <SyntaxHighlighter language="javascript" style={docco}>
-                {(JSON.stringify(pbjsAdUnitTargeting, undefined, 4))}
-              </SyntaxHighlighter>
-            </TabPanel>
+            </TabPanel>            
 
           </Paper>
 
