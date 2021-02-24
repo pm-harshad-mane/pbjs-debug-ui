@@ -17,14 +17,14 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   summary: {
-  	backgroundColor: '#1976d2'
+  	// backgroundColor: '#1976d2'
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
     fontWeight: 'bolder',
-    color: 'white'
+    color: '#1976d2'
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -61,10 +61,9 @@ export default function ControlledAccordions(props) {
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
           <div className={classes.root}>
-          <Config pbjsNamespace={pbjsNamespace} />          
-          <AdUnits pbjsNamespace={pbjsNamespace} />
+            <AdUnits pbjsNamespace={pbjsNamespace} />
+            <Config pbjsNamespace={pbjsNamespace} />            
           </div>
-
         </AccordionDetails>
       </Accordion>
 

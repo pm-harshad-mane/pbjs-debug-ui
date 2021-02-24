@@ -46,7 +46,7 @@ import Tab from '@material-ui/core/Tab';
 import {TabPanel, a11yProps} from './TabPanel'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-
+import BidDetails from './BidDetails';
 
 
 // ToDo:
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   }, 
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    // flexBasis: '33.33%',
+    // flexBasis: '33.33%',    
     flexShrink: 0
   },
   secondaryHeading: {
@@ -76,7 +76,11 @@ const useStyles = makeStyles((theme) => ({
   },
   tabPanelRoot: {
     // flexGrow: 1
-    width: '100%'
+    width: '100%',
+    '& .MuiTab-root': {
+      padding: '0px'
+    }
+
   }
 }));
 
@@ -84,6 +88,7 @@ export default function AdUnit(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [displayed, setDisplayed] = React.useState(false);
+  const [pbjsAdUnitTargeting, setPbjsAdUnitTargeting] = React.useState({});
   // const [pbjsConfig, setPbjsConfig] = React.useState({debug: false});
   const {pbjsNamespace, pbjsAdUnit} = props;
 
@@ -91,6 +96,7 @@ export default function AdUnit(props) {
     setExpanded(isExpanded ? panel : false);
     if(isExpanded && !displayed){
       window[pbjsNamespace].que.push(function(){
+        setPbjsAdUnitTargeting( window[pbjsNamespace].getAdserverTargetingForAdUnitCode([pbjsAdUnit.code]) );        
         setDisplayed(true);
       });
     }
@@ -131,7 +137,7 @@ export default function AdUnit(props) {
             </Tabs>
 
             <TabPanel value={tabValue} index={0}>
-              Bids Data will be here, create another component
+              <BidDetails />
             </TabPanel>
 
             <TabPanel value={tabValue} index={1}>
@@ -147,7 +153,9 @@ export default function AdUnit(props) {
             </TabPanel>
 
             <TabPanel value={tabValue} index={3}>
-              AdServer Targeing Data will be here, create another component
+              <SyntaxHighlighter language="javascript" style={docco}>
+                {(JSON.stringify(pbjsAdUnitTargeting, undefined, 4))}
+              </SyntaxHighlighter>
             </TabPanel>
 
           </Paper>
