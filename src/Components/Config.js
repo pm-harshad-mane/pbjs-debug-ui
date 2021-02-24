@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
-    color: 'orange',
+    color: '#ff6f00',
     fontWeight: 'bold'    
   },
   secondaryHeading: {
