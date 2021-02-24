@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import AccUI from './AccUI';
 import Config from './Config';
 import AdUnits from './AdUnits';
+import UserIds from './UserIds';
 
 // ToDo:
 // check hard-coded ids
@@ -15,6 +16,10 @@ import AdUnits from './AdUnits';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+
+    '& pre': {
+      fontSize: '14px'
+    }
   },
   summary: {
   	// backgroundColor: '#1976d2'
@@ -28,8 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    // color: theme.palette.text.secondary,
-    color: 'white'
+    color: 'rgba(0, 0, 0, 0.54)'
   },
   accordionDetails: {
     padding: '0px',
@@ -57,12 +61,13 @@ export default function ControlledAccordions(props) {
           className={classes.summary}
         >
           <Typography className={classes.heading}>PrebidJS Debug UI</Typography>
-          <Typography className={classes.secondaryHeading}></Typography>
+          <Typography className={classes.secondaryHeading}>Powered by Harshad Mane</Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
           <div className={classes.root}>
             <AdUnits pbjsNamespace={pbjsNamespace} />
-            <Config pbjsNamespace={pbjsNamespace} />            
+            <UserIds pbjsNamespace={pbjsNamespace} />
+            <Config pbjsNamespace={pbjsNamespace} />
           </div>
         </AccordionDetails>
       </Accordion>
