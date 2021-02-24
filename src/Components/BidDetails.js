@@ -56,7 +56,8 @@ function Row(props) {
         <TableCell align="left">{row.bidderCode}</TableCell>
         <TableCell align="right">{row.cpm}</TableCell>
         <TableCell align="right">{row.timeToRespond}ms</TableCell>
-        <TableCell align="right">{row.adId}</TableCell>
+        <TableCell align="right">{row.size}</TableCell>
+        <TableCell align="right">{row.mediaType}</TableCell>
         <TableCell align="right">{row.source}</TableCell>
         <TableCell align="right">{row.statusMessage}</TableCell>
       </TableRow>
@@ -125,7 +126,8 @@ export default function BidDetails(props) {
             <TableCell >Bidder</TableCell>
             <TableCell align="right">CPM</TableCell>
             <TableCell align="right">Latency</TableCell>
-            <TableCell align="right">BidId</TableCell>
+            <TableCell align="right">Size</TableCell>
+            <TableCell align="right">MediaType</TableCell>
             <TableCell align="right">Source</TableCell>            
             <TableCell align="right">Message</TableCell>            
           </TableRow>
