@@ -113,6 +113,9 @@ const tableClasses = makeStyles({
   }
 });
 
+//  TODO: Remove unnecessary bidderCode
+//  TODO: add PB winning bid status and bid rendered status use Icon
+
 export default function BidDetails(props) {
   const classes = tableClasses();
   const {bidResponses} = props;
