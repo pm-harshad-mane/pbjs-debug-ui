@@ -1,5 +1,25 @@
 TODO:
 
+- Create a copy of the data retrieved from PBJS, do not alter PBJS DATA!!!!
+- Why PBJS getAdserverTargeting does not return data after setTargetingForGptAsync is called?
+-- can this be changed? will be better to see the data later
+---- will need PR
+-- we can also use GPT ad-slot to fetch these details
+---- a bit tricky, but we need to do it for showing overlay on slots
+- PR to Prebid: list of modules in an array
+- PR to Prebid: expose prebid name-space in a common var like window.PREBID_NAMESPACE = 'pbjs';
+- show userIDs related config here in UserIDs tab
+
+Feature list
+- show dashboard 
+-- total ad-slots
+-- time for auction
+-- time for ad rendering
+-- total bid sreceived
+-- total no-bids received
+-- number of bidders
+
+
 expandable accordion like componenet
 - Option: expand collapse
 - Option: Load the data on expand or directly
