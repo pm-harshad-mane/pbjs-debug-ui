@@ -104,7 +104,7 @@ export default function UserIds(props) {
               <Paper square className={classes.tabPanelRoot}>
                 As Configured using pbjs.setConfig()
                 <SyntaxHighlighter language="javascript" style={docco}>
-                    {(JSON.stringify(pbjsConfig.userSync.userIds, undefined, 4))}
+                    { (pbjsConfig && pbjsConfig.userSync && pbjsConfig.userSync.userIds) ? JSON.stringify(pbjsConfig.userSync.userIds, undefined, 4) : ''}
                   </SyntaxHighlighter>                      
               </Paper>
             </TabPanel>
