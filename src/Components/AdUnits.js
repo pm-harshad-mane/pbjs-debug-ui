@@ -78,7 +78,6 @@ export default function AdUnits(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [displayed, setDisplayed] = React.useState(false);
-  // const [pbjsConfig, setPbjsConfig] = React.useState({debug: false});
   const [pbjsAdUnits, setPbjsAdUnits] = React.useState([]);
   const {pbjsNamespace} = props;
 
@@ -113,8 +112,8 @@ export default function AdUnits(props) {
         <AccordionDetails className={classes.accordionDetails}>
           <div className={classes.adUnitWrapper}>
           	{pbjsAdUnits.map((adUnit,index)=>{
-				return <AdUnit pbjsNamespace={pbjsNamespace} pbjsAdUnit={adUnit} key={adUnit.code} />
-	     	})}          	
+    				  return <AdUnit pbjsNamespace={pbjsNamespace} pbjsAdUnit={adUnit} key={adUnit.code} />
+    	     	})}          	
           </div>
         </AccordionDetails>
       </Accordion>

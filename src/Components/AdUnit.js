@@ -58,13 +58,15 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   Accordion: {
-    backgroundColor: 'rgba(0, 0, 0, .03)',
+    // backgroundColor: 'rgba(0, 0, 0, .03)',
     padding: '0px',
     width: '100%'
   }, 
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    // flexBasis: '33.33%',    
+    // flexBasis: '33.33%',
+    color: '#333',
+    fontWeight: 'bold',
     flexShrink: 0
   },
   secondaryHeading: {
@@ -88,16 +90,26 @@ export default function AdUnit(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [displayed, setDisplayed] = React.useState(false);
-  const [pbjsAdUnitTargeting, setPbjsAdUnitTargeting] = React.useState({});
+  const [pbjsAdUnitTargeting, setPbjsAdUnitTargeting] = React.useState({a: 'bb'});
+  const [pbjsAdUnitBidResponses, setPbjsAdUnitBidResponses] = React.useState([]);
   // const [pbjsConfig, setPbjsConfig] = React.useState({debug: false});
   const {pbjsNamespace, pbjsAdUnit} = props;
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
-    if(isExpanded && !displayed){
+    if(isExpanded /*&& !displayed*/){
       window[pbjsNamespace].que.push(function(){
-        setPbjsAdUnitTargeting( window[pbjsNamespace].getAdserverTargetingForAdUnitCode([pbjsAdUnit.code]) );        
-        setDisplayed(true);
+        // window[pbjsNamespace].onEvent('auctionEnd', function(){
+          const temp = window[pbjsNamespace].getAdserverTargetingForAdUnitCode(pbjsAdUnit.code);
+          setPbjsAdUnitTargeting( temp );
+          // console.log('temp', temp);
+          // console.log('pbjsAdUnitTargeting', pbjsAdUnitTargeting);
+          const bidResponses = window[pbjsNamespace].getBidResponses();          
+          // setPbjsAdUnitBidResponses([...pbjsAdUnitBidResponses, ...bidResponses[pbjsAdUnit.code].bids]); // Merge
+          setPbjsAdUnitBidResponses([...bidResponses[pbjsAdUnit.code].bids]); // Replace
+          console.log('pbjsAdUnitBidResponses', pbjsAdUnitBidResponses)
+          setDisplayed(true);
+        // });
       });
     }
   };
@@ -137,7 +149,7 @@ export default function AdUnit(props) {
             </Tabs>
 
             <TabPanel value={tabValue} index={0}>
-              <BidDetails />
+              <BidDetails bidResponses={pbjsAdUnitBidResponses} />
             </TabPanel>
 
             <TabPanel value={tabValue} index={1}>

@@ -41,7 +41,7 @@ function createData(name, calories, fat, carbs, protein, price) {
 }
 
 function Row(props) {
-  const { row } = props;
+  const { row } = props; // row ==> bid
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -53,12 +53,12 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>      
-        <TableCell align="left">{row.name}</TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell align="left">{row.bidderCode}</TableCell>
+        <TableCell align="right">{row.cpm}</TableCell>
+        <TableCell align="right">{row.timeToRespond}ms</TableCell>
+        <TableCell align="right">{row.adId}</TableCell>
+        <TableCell align="right">{row.source}</TableCell>
+        <TableCell align="right">{row.statusMessage}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
@@ -67,7 +67,7 @@ function Row(props) {
               <Typography variant="p" gutterBottom component="div">
                 Bid Details:
                 <SyntaxHighlighter language="javascript" style={docco}>
-                  {(JSON.stringify({a: 1, b: 33}, undefined, 4))}
+                  {(JSON.stringify(row, undefined, 4))}
                 </SyntaxHighlighter>
               </Typography>              
             </Box>
@@ -112,8 +112,10 @@ const tableClasses = makeStyles({
   }
 });
 
-export default function BidDetails() {
+export default function BidDetails(props) {
   const classes = tableClasses();
+  const {bidResponses} = props;
+
   return (
     <TableContainer component={Paper} className={classes.root}>
       <Table aria-label="collapsible table">
@@ -129,8 +131,8 @@ export default function BidDetails() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
+          {bidResponses.map((bid) => (
+            <Row key={bid.adId} row={bid} />
           ))}
         </TableBody>
       </Table>
