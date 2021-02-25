@@ -19,6 +19,7 @@ Feature list
 -- total no-bids received
 -- number of bidders
 
+- https://create-react-app.dev/docs/advanced-configuration/
 
 expandable accordion like componenet
 - Option: expand collapse

@@ -26,7 +26,13 @@ Approach 2
 - so that it will be easy for pubs to work
 
 Approach 3 ; only Desktop
-- If a dev wants to try our code on a publisher site where our code is not configured then for desktop environment the page can be modified and the code can be added for local environment using Chrome Dev Tool
+- If a dev wants to try our code on a publisher site where our code is not configured then for desktop environment the page can be modified and the code can be added for local environment using Chrome Dev Tool?
+- it is bit difficult to work
+
+Approach 4
+- We can create an extension for now to add the required code on the page
+- use this extension to add our code on page https://chrome.google.com/webstore/detail/custom-javascript-for-web/poakhlngfciodnhlhhgnaaelnpjljija?hl=en
+
 
 
 Authentication
