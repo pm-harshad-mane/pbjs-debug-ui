@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     top: '5px',
     right: '5px',
     padding: '0px',
-    zIndex: '2147483648'// set to max 
+    zIndex: '2147483648'// set to max; observed max is 999999
   }
 }));
 
