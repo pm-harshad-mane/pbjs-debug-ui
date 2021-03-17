@@ -1,5 +1,11 @@
 TODO:
 
+Tested on websites
+- https://www.thecountrychiccottage.net/
+- https://www.sportsfeelgoodstories.com/
+
+
+- Update the custom-bundle job
 - Create a copy of the data retrieved from PBJS, do not alter PBJS DATA!!!!
 - Why PBJS getAdserverTargeting does not return data after setTargetingForGptAsync is called?
 -- can this be changed? will be better to see the data later
@@ -18,6 +24,7 @@ Feature list
 -- total bid sreceived
 -- total no-bids received
 -- number of bidders
+- On each Ad-unit show how many bids it has got
 
 - https://create-react-app.dev/docs/advanced-configuration/
 
