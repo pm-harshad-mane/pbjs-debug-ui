@@ -93,7 +93,7 @@ function Row(props) {
                 </Tabs>
                 <TabPanel value={tabValue} index={0}>
                   <SyntaxHighlighter language="json" style={docco}>
-                    {(JSON.stringify(row.params, undefined, 4))}
+                    {(JSON.stringify(row.params || {err: "params not found"}, undefined, 4))}
                   </SyntaxHighlighter>
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
