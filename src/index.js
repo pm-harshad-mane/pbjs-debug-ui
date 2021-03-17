@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App/App';
 
-document.addEventListener("DOMContentLoaded", function(){
+// document.addEventListener("DOMContentLoaded", function(){
 	const APP_UI_DIV_ID = "pbjs-debug-ui";
 	const PBJS_NAMESPACE = window.PBJS_NAMESPACE || "pbjs";
 	let div = document.createElement('div');
@@ -24,5 +24,5 @@ document.addEventListener("DOMContentLoaded", function(){
 	  </div>,
 	  document.getElementById(APP_UI_DIV_ID)
 	);
-});
+// });
 
