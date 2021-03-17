@@ -68,6 +68,7 @@ export default function Config(props) {
   const [displayed, setDisplayed] = React.useState(false);
   const [pbjsConfig, setPbjsConfig] = React.useState({debug: false});
   const {pbjsNamespace} = props;
+  const [pbjsVersion, setPbjsVersion] = React.useState([]);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -79,7 +80,8 @@ export default function Config(props) {
             prev[key] = _pbjsConfig[key];
             return prev  
         }, {});
-        setPbjsConfig(displayPbjsConfig);
+        setPbjsConfig(displayPbjsConfig);    
+        setPbjsVersion(window[pbjsNamespace].version);
         setDisplayed(true);
       });
     }
@@ -118,6 +120,12 @@ export default function Config(props) {
             </Tabs>
             <TabPanel value={tabValue} index={0}>            
               <List>
+                <ListItem className={classes.ListItem}>                  
+                  <ListItemText primary="Prebid Version" />
+                  <ListItemSecondaryAction>
+                    {pbjsVersion}
+                  </ListItemSecondaryAction>
+                </ListItem>
                 <ListItem className={classes.ListItem}>                  
                   <ListItemText primary="Bidder Timeout" />
                   <ListItemSecondaryAction>
