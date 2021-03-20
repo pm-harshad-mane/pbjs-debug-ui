@@ -8,10 +8,17 @@ import {TabPanel, a11yProps} from './TabPanel'
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json';
+import xml from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import {html as beautify_html} from 'js-beautify';
 
-var beautify_html = require('js-beautify').html;
+// TODO: can we avoid using js-beautify, it is 136KB in size 30% of the build
+
+SyntaxHighlighter.registerLanguage('json', json);
+SyntaxHighlighter.registerLanguage('xml', xml);
+
 
 const useRowStyles = makeStyles({
   root: {
@@ -102,7 +109,7 @@ function Row(props) {
                 </TabPanel>
                 <TabPanel value={tabValue} index={3}>
                   <Paper square className={classes.tabPanelRoot}>
-                  <SyntaxHighlighter language="vbscriptHtml" wrapLongLines={true} style={docco}>                    
+                  <SyntaxHighlighter language="xml" wrapLongLines={true} style={docco}>                    
                     {beautify_html(row.ad.replace(/></g, '>\n<'))}
                   </SyntaxHighlighter>
                   </Paper>
