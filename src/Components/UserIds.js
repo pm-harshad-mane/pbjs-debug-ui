@@ -6,8 +6,13 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography, Paper, Tabs,
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import {TabPanel, a11yProps} from './TabPanel'
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
+
+SyntaxHighlighter.registerLanguage('javascript', js);
+
 
 // ToDo:
 // check hard-coded ids
