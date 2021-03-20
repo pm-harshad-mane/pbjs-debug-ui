@@ -17,6 +17,8 @@ Tested on websites
 - show userIDs related config here in UserIDs tab
 
 Feature list
+- Display Errors , listen to auctionDebug event
+-- https://docs.prebid.org/dev-docs/publisher-api-reference.html#module_pbjs.onEvent
 - show dashboard 
 -- total ad-slots
 -- time for auction
