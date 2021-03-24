@@ -3,6 +3,10 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import {Typography} from '@material-ui/core/Typography';
 
+
+// Todo: Implement Vertical Tabs: https://material-ui.com/components/tabs/#vertical-tabs
+
+
 const useStyles = makeStyles((theme) => ({
   TabPanel: {
     maxHeight: '300px',

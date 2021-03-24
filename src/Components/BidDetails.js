@@ -133,7 +133,10 @@ const tableClasses = makeStyles({
   }
 });
 
-//  TODO: add PB winning bid status and bid rendered status use Icons with text on hover
+// TODO: Add PB winning bid status and bid rendered status use Icons with text on hover
+// TODO: Use Data Tables with sort options, https://material-ui.com/components/tables/#data-table
+// TODO: Add fixed header, https://material-ui.com/components/tables/#fixed-header
+// TODO: Remove MediaType, Message from Table
 
 export default function BidDetails(props) {
   const classes = tableClasses();
@@ -151,7 +154,7 @@ export default function BidDetails(props) {
             <TableCell align="right">Size</TableCell>
             <TableCell align="right">MediaType</TableCell>
             <TableCell align="right">Source</TableCell>            
-            <TableCell align="right">Message</TableCell>            
+            <TableCell align="right">Message</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
