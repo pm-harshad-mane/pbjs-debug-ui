@@ -1,9 +1,39 @@
 TODO:
 
+
+MVP
+- Changes in PBJS module to collect auction level data
+-- order of auctions
+- In UI project, load the JS with delay
+-- auto expand the first auction
+- Auction wise data presentation
+- New auctions should be added as are done
+- stop updating data on expand
+- Error logs
+- Mark auction winner, rendered bid
+- No bids
+- AdUnit summary info
+- AdUnit targeting
+-- change in PBJS module to gather this info
+- Revamp Config panel with Vertical tabs
+-- User Sync config
+- GDPR Consent Information
+- Demo with a live pub
+- CSS fixes
+- Versioning of the UI lib?
+
+
+Next Release
+- Copy Ad Creative
+- List of all loaded Modules
+- Overlay on the ad-slots with details
+- Floor data?
+- Bidder HTTP request-response
+
+
 Tested on websites
 - https://www.thecountrychiccottage.net/
 - https://www.sportsfeelgoodstories.com/
-
 
 - Update the custom-bundle job
 - Create a copy of the data retrieved from PBJS, do not alter PBJS DATA!!!!
@@ -13,8 +43,6 @@ Tested on websites
 -- we can also use GPT ad-slot to fetch these details
 ---- a bit tricky, but we need to do it for showing overlay on slots
 - PR to Prebid: list of modules in an array
-- PR to Prebid: expose prebid name-space in a common var like window.PREBID_NAMESPACE = 'pbjs';
-- show userIDs related config here in UserIDs tab
 
 Feature list
 - Display Errors , listen to auctionDebug event
@@ -23,7 +51,7 @@ Feature list
 -- total ad-slots
 -- time for auction
 -- time for ad rendering
--- total bid sreceived
+-- total bids received
 -- total no-bids received
 -- number of bidders
 - On each Ad-unit show how many bids it has got
