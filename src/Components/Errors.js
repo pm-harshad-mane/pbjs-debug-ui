@@ -60,7 +60,7 @@ export default function Errors(props) {
           className={classes.summary}
         >
           <Typography className={classes.heading}>Errors</Typography>
-          <Typography className={classes.secondaryHeading}></Typography>
+          <Typography className={classes.secondaryHeading}>{window[pbjsNamespace]._pbjsDebugUI._debug.length}</Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
           <Paper square className={classes.tabPanelRoot}>
