@@ -32,7 +32,8 @@
 
         <!-- PBJS -->
         <script async src="//www.googletagservices.com/tag/js/gpt.js"></script>
-        <script async src="https://acdn.adnxs.com/prebid/not-for-prod/prebid.js"></script>
+        <!-- <script async src="https://acdn.adnxs.com/prebid/not-for-prod/prebid.js"></script> -->
+        <script async src="prebid.js"></script>
         <!-- <script type="text/javascript" src="prebidDebugUI.js"></script> -->
         <script>
             var div_1_sizes = [
@@ -262,10 +263,81 @@
                     }
                 });
 
-                // noBid
+                // Common FPD
+                pbjs.setConfig({
+                   ortb2: {
+                       site: {
+                           name: "example",
+                           domain: "page.example.com",
+                           cat: ["IAB2"],
+                           sectioncat: ["IAB2-2"],
+                           pagecat: ["IAB2-2"],
+                           page: "https://page.example.com/here.html",
+                           ref: "https://ref.example.com",
+                           keywords: "power tools, drills",
+                           search: "drill",
+                           content: {
+                        userrating: "4",
+                        data: [{
+                                "name": "www.dataprovider1.com",
+                                "ext": { "taxonomyname": "iab_content_taxonomy" },
+                            "segment": [
+                                    { "id": "687" }, 
+                                    { "id": "123" }
+                            ]
+                                }]
+                       },
+                       ext: {
+                               data: {   // fields that aren't part of openrtb 2.5
+                                   pageType: "article",
+                                   category: "repair"
+                               }
+                       }
+                        },
+                        user: {
+                           yob: 1985,
+                           gender: "m",
+                           keywords: "a,b",
+                       data: [{
+                           name: "dataprovider.com",
+                           ext: { taxonomyname: "iab_audience_taxonomy" },
+                               segment: [
+                          { id: "1" }
+                               ]
+                       }],
+                       ext: {
+                               data: {
+                                  registered: true,
+                                  interests: ["cars"]
+                           }
+                           }
+                        }
+                    }
+                });
+
                 pbjs.onEvent('noBid', function(){
                     console.log('in noBid with args', arguments);
                 });
+
+                pbjs.onEvent('auctionInit', function(){
+                    console.log('in auctionInit with args', arguments);
+                });
+
+                pbjs.onEvent('auctionEnd', function(){
+                    console.log('in auctionEnd with args', arguments);
+                });
+
+                pbjs.onEvent('auctionDebug', function(){
+                    console.log('in auctionDebug with args', arguments);
+                });
+
+                pbjs.onEvent('setTargeting', function(){
+                    console.log('in setTargeting with args', arguments);
+                });
+
+                pbjs.onEvent('tcf2Enforcement', function(){
+                    console.log('in tcf2Enforcement with args', arguments);
+                })
 
                 pbjs.addAdUnits(adUnits);
                 pbjs.requestBids({
