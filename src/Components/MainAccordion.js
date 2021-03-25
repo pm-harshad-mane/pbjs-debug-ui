@@ -8,6 +8,7 @@ import AdUnits from './AdUnits';
 import UserIds from './UserIds';
 import Errors from './Errors';
 import TCF2 from './TCF2';
+import FPD from './FPD';
 
 // ToDo:
 // check hard-coded ids
@@ -67,6 +68,7 @@ export default function ControlledAccordions(props) {
             <AdUnits pbjsNamespace={pbjsNamespace} />
             <UserIds pbjsNamespace={pbjsNamespace} />
             <Config pbjsNamespace={pbjsNamespace} />
+            <FPD pbjsNamespace={pbjsNamespace} />
             <TCF2 pbjsNamespace={pbjsNamespace} />
             <Errors pbjsNamespace={pbjsNamespace} />
           </div>
