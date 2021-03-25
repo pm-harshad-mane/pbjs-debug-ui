@@ -14,7 +14,6 @@ SyntaxHighlighter.registerLanguage('javascript', js);
 
 // ToDo:
 // check hard-coded ids
-// add tabs ui for user-friendly and raw JSON versio
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,20 +37,40 @@ const useStyles = makeStyles((theme) => ({
   accordionDetails: {
     padding: '0px'
   },
-  tabPanelRoot: {
-    flexGrow: 1,
-    width: '100%'
+
+  ListItem: {
+    paddingTop: '0px',
+    paddingBottom: '0px',
+
+    '& .MuiTypography-root': {
+      fontSize: 'inherit'
+    }    
   },
+
   tabPanelRootForEditor: {
     flexGrow: 1,
     width: '100%',
-    maxHeight: '300px',
+    maxHeight: '270px',
     overflow: 'scroll'
   },
-  ListItem: {
-      paddingTop: '0px',
-      paddingBottom: '0px'
+
+  verticalTabsRoot: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    display: 'flex',
+    height: 300,
+
+    '& .MuiTab-wrapper': {
+      alignItems: 'flex-start'
     }
+  },
+  verticalTabsLabel: {
+    borderRight: '1px solid dodgerblue',
+    textTransform: 'none'
+  },
+  verticalTabsTabPanel: {
+    width: '70%'
+  }
 }));
 
 export default function Config(props) {
@@ -98,66 +117,88 @@ export default function Config(props) {
           <Typography className={classes.secondaryHeading}></Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
-          <Paper square className={classes.tabPanelRoot}>
-            <Tabs
+            <div className={classes.verticalTabsRoot}>            
+              <Tabs
+              orientation="vertical"
+              variant="scrollable"
               value={tabValue}
-              indicatorColor="primary"
-              textColor="primary"
               onChange={handleTabChange}
-              aria-label="disabled tabs example"
-              variant="fullWidth"
-            >
-              <Tab label="Config" {...a11yProps(0)} />
-              <Tab label="Raw JSON" {...a11yProps(1)} />
-            </Tabs>
-            <TabPanel value={tabValue} index={0}>            
-              <List>
-                <ListItem className={classes.ListItem}>                  
-                  <ListItemText primary="Prebid Version" />
-                  <ListItemSecondaryAction>
-                    {pbjsVersion}
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem className={classes.ListItem}>                  
-                  <ListItemText primary="Bidder Timeout" />
-                  <ListItemSecondaryAction>
-                    {pbjsConfig.bidderTimeout}ms
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem className={classes.ListItem}>                  
-                  <ListItemText primary="Bidder Timeout Buffer" />
-                  <ListItemSecondaryAction>
-                    {pbjsConfig.timeoutBuffer}ms
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem className={classes.ListItem}>
-                  <ListItemText primary="Enable Send All Bids" />
-                  <ListItemSecondaryAction>
-                    {pbjsConfig.enableSendAllBids ? 'true' : 'false'}
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem className={classes.ListItem}>
-                  <ListItemText primary="Use Bid Cache" />
-                  <ListItemSecondaryAction>
-                    {pbjsConfig.useBidCache ? 'true' : 'false'}
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem className={classes.ListItem}>                  
-                  <ListItemText primary="Price Granularity" />
-                  <ListItemSecondaryAction>
-                    {pbjsConfig.priceGranularity}
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </List>
-            </TabPanel>
-            <TabPanel value={tabValue} index={1}>
-              <Paper square className={classes.tabPanelRootForEditor}>
-              <SyntaxHighlighter language="javascript" style={docco}>
-                {(JSON.stringify(pbjsConfig, undefined, 4))}
-              </SyntaxHighlighter>
-              </Paper>
-            </TabPanel>            
-          </Paper>
+              aria-label="Vertical tabs example"
+              className={classes.tabs}
+              >
+                <Tab label="Basic*" {...a11yProps(0)} className={classes.verticalTabsLabel} />
+                <Tab label="S2S" {...a11yProps(1)} className={classes.verticalTabsLabel} />
+                <Tab label="Instream" {...a11yProps(2)} className={classes.verticalTabsLabel} />
+                <Tab label="UserSync" {...a11yProps(3)} className={classes.verticalTabsLabel} />                
+                <Tab label="RAW JSON" {...a11yProps(4)} className={classes.verticalTabsLabel} />
+              </Tabs>
+              <TabPanel value={tabValue} index={0} className={classes.verticalTabsTabPanel}>
+                <List>
+                  <ListItem className={classes.ListItem}>                  
+                    <ListItemText primary="Prebid Version" />
+                    <ListItemSecondaryAction>
+                      {pbjsVersion}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem className={classes.ListItem}>                  
+                    <ListItemText primary="Bidder Timeout" />
+                    <ListItemSecondaryAction>
+                      {pbjsConfig.bidderTimeout}ms
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem className={classes.ListItem}>                  
+                    <ListItemText primary="Bidder Timeout Buffer" />
+                    <ListItemSecondaryAction>
+                      {pbjsConfig.timeoutBuffer}ms
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem className={classes.ListItem}>
+                    <ListItemText primary="Enable Send All Bids" />
+                    <ListItemSecondaryAction>
+                      {pbjsConfig.enableSendAllBids ? 'true' : 'false'}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem className={classes.ListItem}>
+                    <ListItemText primary="Use Bid Cache" />
+                    <ListItemSecondaryAction>
+                      {pbjsConfig.useBidCache ? 'true' : 'false'}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem className={classes.ListItem}>                  
+                    <ListItemText primary="COPPA" />
+                    <ListItemSecondaryAction>
+                      {pbjsConfig.coppa ? 'true' : 'false'}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem className={classes.ListItem}>                  
+                    <ListItemText primary="Price Granularity" />
+                    <ListItemSecondaryAction>
+                      {pbjsConfig.priceGranularity}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </List>
+              </TabPanel>
+              <TabPanel value={tabValue} index={1} className={classes.verticalTabsTabPanel}>
+                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
+                    {(JSON.stringify(pbjsConfig.s2sConfig, undefined, 4))}
+                  </SyntaxHighlighter>
+              </TabPanel>
+              <TabPanel value={tabValue} index={2} className={classes.verticalTabsTabPanel}>
+                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
+                    {(JSON.stringify(pbjsConfig.instreamTracking, undefined, 4))}
+                  </SyntaxHighlighter>
+              </TabPanel>
+              <TabPanel value={tabValue} index={3} className={classes.verticalTabsTabPanel}>
+                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
+                    {(JSON.stringify(pbjsConfig.userSync, undefined, 4))}
+                  </SyntaxHighlighter>
+              </TabPanel>
+              <TabPanel value={tabValue} index={4} className={classes.verticalTabsTabPanel}>
+                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
+                    {(JSON.stringify(pbjsConfig, undefined, 4))}
+                  </SyntaxHighlighter>
+              </TabPanel>              
+            </div>
         </AccordionDetails>
       </Accordion>
       )
