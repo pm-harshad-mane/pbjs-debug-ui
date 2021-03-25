@@ -5,8 +5,11 @@ MVP
 - Auction wise data presentation
 - New auctions should be added as are completed
 - stop updating data on expand
+
 - Error logs
 -- Data needs to be updated in UI as new data is added to arary
+-- what is the first entry with no data
+
 - Mark auction winner, rendered bid
 - No bids
 - AdUnit summary info
@@ -17,15 +20,19 @@ MVP
 -- S2S Config
 -- Instream Config
 -- User Sync config
+-- DONE
 
 - GDPR Consent Information
 -- DONE
+
 - FPD
 -- DONE
+
 - Demo with a live pub
 - CSS fixes
 - Versioning of the UI lib?
 
+===================
 
 Next Release
 - bidTimeout***
@@ -33,13 +40,13 @@ Next Release
 - bidder level configs
 -- FPD
 -- others
-- auto expand the first auction
 - Copy Ad Creative
 - List of all loaded Modules
-- Overlay on the ad-slots with details
+- Overlay on the ad-slots with details ***
 - Floor data?
 - Bidder HTTP request-response
 - adRenderFailed event capture
+- auto expand the first auction
 
 
 
