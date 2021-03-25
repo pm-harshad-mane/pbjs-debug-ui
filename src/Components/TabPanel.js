@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
   TabPanel: {
     maxHeight: '300px',
     minHeight: '300px',
-    overflow: 'scroll'
+    overflow: 'scroll',
+    // width: '100%'
   },
 
   Box: {
@@ -33,7 +34,6 @@ export function TabPanel(props) {
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
       {value === index && (
