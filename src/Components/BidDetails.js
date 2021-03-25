@@ -99,7 +99,7 @@ function Row(props) {
                   </SyntaxHighlighter>
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>
-                  <SyntaxHighlighter language="json" style={docco}>
+                  <SyntaxHighlighter language="json" wrapLongLines={true} style={docco}>
                     {(JSON.stringify((function(){
                       const rowCopy = Object.assign({}, row);
                       delete rowCopy.ad;
@@ -109,7 +109,7 @@ function Row(props) {
                 </TabPanel>
                 <TabPanel value={tabValue} index={3}>
                   <Paper square className={classes.tabPanelRoot}>
-                  <SyntaxHighlighter language="xml" wrapLongLines={true} style={docco}>                    
+                  <SyntaxHighlighter language="xml" wrapLongLines={true} style={docco} >                    
                     {beautify_html(row.ad.replace(/></g, '>\n<'))}
                   </SyntaxHighlighter>
                   </Paper>
