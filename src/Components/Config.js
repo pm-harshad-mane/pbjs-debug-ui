@@ -129,8 +129,10 @@ export default function Config(props) {
                 <Tab label="Basic*" {...a11yProps(0)} className={classes.verticalTabsLabel} />
                 <Tab label="S2S" {...a11yProps(1)} className={classes.verticalTabsLabel} />
                 <Tab label="Instream" {...a11yProps(2)} className={classes.verticalTabsLabel} />
-                <Tab label="UserSync" {...a11yProps(3)} className={classes.verticalTabsLabel} />                
-                <Tab label="RAW JSON" {...a11yProps(4)} className={classes.verticalTabsLabel} />
+                <Tab label="UserSync" {...a11yProps(3)} className={classes.verticalTabsLabel} /> 
+                <Tab label="Auction Options" {...a11yProps(4)} className={classes.verticalTabsLabel} />  
+                <Tab label="Real Time Data" {...a11yProps(5)} className={classes.verticalTabsLabel} />  
+                <Tab label="RAW JSON" {...a11yProps(6)} className={classes.verticalTabsLabel} />
               </Tabs>
               <TabPanel value={tabValue} index={0} className={classes.verticalTabsTabPanel}>
                 <List>
@@ -194,6 +196,16 @@ export default function Config(props) {
                   </SyntaxHighlighter>
               </TabPanel>
               <TabPanel value={tabValue} index={4} className={classes.verticalTabsTabPanel}>
+                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
+                    {(JSON.stringify(pbjsConfig.auctionOptions, undefined, 4))}
+                  </SyntaxHighlighter>
+              </TabPanel>
+              <TabPanel value={tabValue} index={5} className={classes.verticalTabsTabPanel}>
+                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
+                    {(JSON.stringify(pbjsConfig.realTimeData || {}, undefined, 4))}
+                  </SyntaxHighlighter>
+              </TabPanel>              
+              <TabPanel value={tabValue} index={6} className={classes.verticalTabsTabPanel}>
                   <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
                     {(JSON.stringify(pbjsConfig, undefined, 4))}
                   </SyntaxHighlighter>
