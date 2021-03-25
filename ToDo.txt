@@ -2,14 +2,11 @@ TODO:
 
 
 MVP
-- Changes in PBJS module to collect auction level data
--- order of auctions
-- In UI project, load the JS with delay
--- auto expand the first auction
 - Auction wise data presentation
-- New auctions should be added as are done
+- New auctions should be added as are completed
 - stop updating data on expand
 - Error logs
+-- Data needs to be updated in UI as new data is added to arary
 - Mark auction winner, rendered bid
 - No bids
 - AdUnit summary info
@@ -24,11 +21,13 @@ MVP
 
 
 Next Release
+- auto expand the first auction
 - Copy Ad Creative
 - List of all loaded Modules
 - Overlay on the ad-slots with details
 - Floor data?
 - Bidder HTTP request-response
+- adRenderFailed event capture
 
 
 Tested on websites
