@@ -12,15 +12,27 @@ MVP
 - AdUnit summary info
 - AdUnit targeting
 -- change in PBJS module to gather this info
+
 - Revamp Config panel with Vertical tabs
+-- S2S Config
+-- Instream Config
 -- User Sync config
+
 - GDPR Consent Information
+-- DONE
+- FPD
+-- DONE
 - Demo with a live pub
 - CSS fixes
 - Versioning of the UI lib?
 
 
 Next Release
+- bidTimeout***
+- Currency
+- bidder level configs
+-- FPD
+-- others
 - auto expand the first auction
 - Copy Ad Creative
 - List of all loaded Modules
@@ -28,6 +40,7 @@ Next Release
 - Floor data?
 - Bidder HTTP request-response
 - adRenderFailed event capture
+
 
 
 Tested on websites
