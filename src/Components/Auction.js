@@ -117,10 +117,10 @@ export default function Auction(props) {
       <TabPanel value={tabValue} index={0}>
         {createSummaryList()}
       </TabPanel>
-      <TabPanel value={tabValue} index={1}>
+      <TabPanel value={tabValue} index={1} style={{maxHeight: 'auto'}}>
         <div className={classes.auctionWrapper}>
           {auctionData._end.adUnits.map((adUnit,index)=>{
-            return <AdUnit pbjsNamespace={pbjsNamespace} pbjsAdUnit={adUnit} key={adUnit.code} />
+            return <AdUnit pbjsNamespace={pbjsNamespace} auctionData={auctionData} pbjsAdUnit={adUnit} key={adUnit.code} />
           })}           
         </div>
       </TabPanel>            
