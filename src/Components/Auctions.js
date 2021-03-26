@@ -33,11 +33,13 @@ const useStyles = makeStyles((theme) => ({
   tabPanelRoot: {
     flexGrow: 1,
     maxHeight: '300px',
-    overflow: 'scroll'
+    overflow: 'scroll',
+    padding: '0px'
   },
 
   auctionWrapper: {
     width: '100%',
+    padding: '0px'
   }
 }));
 
@@ -83,7 +85,7 @@ export default function Auctions(props) {
               })}           
             </Tabs>
             {window[pbjsNamespace]._pbjsDebugUI._auctions.map((auction,index)=>{
-              return <TabPanel value={tabValue} index={index}><Auction pbjsNamespace={pbjsNamespace} auctionData={auction} key={auction.auctionId} /></TabPanel>
+              return <TabPanel className={classes.auctionWrapper} value={tabValue} index={index}><Auction pbjsNamespace={pbjsNamespace} auctionData={auction} key={auction.auctionId} /></TabPanel>
             })}            
           </Paper>
         </AccordionDetails>
