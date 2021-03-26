@@ -105,6 +105,68 @@ export default function Config(props) {
     setTabValue(newValue);
   };
 
+// todo: use array.map tp cretae the repeating components
+
+  let ListItemsData = [
+    {title: 'Prebid Version', value: pbjsVersion},
+    {title: 'Bidder Timeout', value: pbjsConfig.bidderTimeout+'ms'},
+    {title: 'Enable Send All Bids', value: pbjsConfig.enableSendAllBids ? 'true' : 'false'},
+    {title: 'Use Bid Cache', value: pbjsConfig.useBidCache ? 'true' : 'false'},
+    {title: 'COPPA', value: pbjsConfig.coppa ? 'true' : 'false'},
+    {title: 'Price Granularity', value: pbjsConfig.priceGranularity},
+  ];
+
+  function createTab(index, childComponent){
+    return(
+      <TabPanel value={tabValue} index={index} className={classes.verticalTabsTabPanel}>
+        {childComponent}
+      </TabPanel>
+    )
+  }
+
+  function createBasicList(){
+    return(
+      <List>
+        {ListItemsData.map((listItem,index)=>{
+          return (
+            <ListItem className={classes.ListItem}>                  
+              <ListItemText primary={listItem.title} />
+              <ListItemSecondaryAction>
+                {listItem.value}
+              </ListItemSecondaryAction>
+            </ListItem>
+          )
+        })}
+      </List>
+    )
+  }
+
+  function createSyntaxHighlighter(data){
+    return(
+      <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
+        {(JSON.stringify(data, undefined, 4))}
+      </SyntaxHighlighter>
+    );
+  }
+
+  function createTitleTab(title, index){
+    return <Tab label={title} {...a11yProps({index})} className={classes.verticalTabsLabel} />    
+  }
+
+  let title = "Basic *";
+  let index = 0;
+
+  let theTabs = [
+    {tabTitle: "Basic *", childComponent: createBasicList()},
+    {tabTitle: "S2S", childComponent: createSyntaxHighlighter(pbjsConfig.s2sConfig)},
+    {tabTitle: "Instream", childComponent: createSyntaxHighlighter(pbjsConfig.instreamTracking)},
+    {tabTitle: "UserSync", childComponent: createSyntaxHighlighter(pbjsConfig.userSync)},
+    {tabTitle: "Auction Options", childComponent: createSyntaxHighlighter(pbjsConfig.auctionOptions)},
+    {tabTitle: "Real Time Data", childComponent: createSyntaxHighlighter(pbjsConfig.realTimeData || {})},
+    {tabTitle: "SCHAIN", childComponent: createSyntaxHighlighter(pbjsConfig.schain || {})},
+    {tabTitle: "RAW JSON", childComponent: createSyntaxHighlighter(pbjsConfig)},
+  ];
+
   return (    
 
       <Accordion className={classes.Accordion} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -127,96 +189,13 @@ export default function Config(props) {
               aria-label="Vertical tabs example"
               className={classes.tabs}
               >
-                <Tab label="Basic*" {...a11yProps(0)} className={classes.verticalTabsLabel} />
-                <Tab label="S2S" {...a11yProps(1)} className={classes.verticalTabsLabel} />
-                <Tab label="Instream" {...a11yProps(2)} className={classes.verticalTabsLabel} />
-                <Tab label="UserSync" {...a11yProps(3)} className={classes.verticalTabsLabel} /> 
-                <Tab label="Auction Options" {...a11yProps(4)} className={classes.verticalTabsLabel} />  
-                <Tab label="Real Time Data" {...a11yProps(5)} className={classes.verticalTabsLabel} />
-                <Tab label="SCHAIN" {...a11yProps(6)} className={classes.verticalTabsLabel} />
-                <Tab label="RAW JSON" {...a11yProps(7)} className={classes.verticalTabsLabel} />
+                {theTabs.map((tab,index)=>{
+                  return createTitleTab(tab.tabTitle, index)
+                })}
               </Tabs>
-              <TabPanel value={tabValue} index={0} className={classes.verticalTabsTabPanel}>
-                <List>
-                  <ListItem className={classes.ListItem}>                  
-                    <ListItemText primary="Prebid Version" />
-                    <ListItemSecondaryAction>
-                      {pbjsVersion}
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem className={classes.ListItem}>                  
-                    <ListItemText primary="Bidder Timeout" />
-                    <ListItemSecondaryAction>
-                      {pbjsConfig.bidderTimeout}ms
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem className={classes.ListItem}>                  
-                    <ListItemText primary="Bidder Timeout Buffer" />
-                    <ListItemSecondaryAction>
-                      {pbjsConfig.timeoutBuffer}ms
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem className={classes.ListItem}>
-                    <ListItemText primary="Enable Send All Bids" />
-                    <ListItemSecondaryAction>
-                      {pbjsConfig.enableSendAllBids ? 'true' : 'false'}
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem className={classes.ListItem}>
-                    <ListItemText primary="Use Bid Cache" />
-                    <ListItemSecondaryAction>
-                      {pbjsConfig.useBidCache ? 'true' : 'false'}
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem className={classes.ListItem}>                  
-                    <ListItemText primary="COPPA" />
-                    <ListItemSecondaryAction>
-                      {pbjsConfig.coppa ? 'true' : 'false'}
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem className={classes.ListItem}>                  
-                    <ListItemText primary="Price Granularity" />
-                    <ListItemSecondaryAction>
-                      {pbjsConfig.priceGranularity}
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                </List>
-              </TabPanel>
-              <TabPanel value={tabValue} index={1} className={classes.verticalTabsTabPanel}>
-                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
-                    {(JSON.stringify(pbjsConfig.s2sConfig, undefined, 4))}
-                  </SyntaxHighlighter>
-              </TabPanel>
-              <TabPanel value={tabValue} index={2} className={classes.verticalTabsTabPanel}>
-                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
-                    {(JSON.stringify(pbjsConfig.instreamTracking, undefined, 4))}
-                  </SyntaxHighlighter>
-              </TabPanel>
-              <TabPanel value={tabValue} index={3} className={classes.verticalTabsTabPanel}>
-                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
-                    {(JSON.stringify(pbjsConfig.userSync, undefined, 4))}
-                  </SyntaxHighlighter>
-              </TabPanel>
-              <TabPanel value={tabValue} index={4} className={classes.verticalTabsTabPanel}>
-                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
-                    {(JSON.stringify(pbjsConfig.auctionOptions, undefined, 4))}
-                  </SyntaxHighlighter>
-              </TabPanel>
-              <TabPanel value={tabValue} index={5} className={classes.verticalTabsTabPanel}>
-                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
-                    {(JSON.stringify(pbjsConfig.realTimeData || {}, undefined, 4))}
-                  </SyntaxHighlighter>
-              </TabPanel>
-              <TabPanel value={tabValue} index={6} className={classes.verticalTabsTabPanel}>
-                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
-                    {(JSON.stringify(pbjsConfig.schain || {}, undefined, 4))}
-                  </SyntaxHighlighter>
-              </TabPanel>              
-              <TabPanel value={tabValue} index={7} className={classes.verticalTabsTabPanel}>
-                  <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
-                    {(JSON.stringify(pbjsConfig, undefined, 4))}
-                  </SyntaxHighlighter>
-              </TabPanel>              
+              {theTabs.map((tab,index)=>{
+                return createTab(index, tab.childComponent)
+              })}              
             </div>
         </AccordionDetails>
       </Accordion>
