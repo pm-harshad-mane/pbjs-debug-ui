@@ -39,12 +39,12 @@ MVP
 Next Releases
 - bidTimeout ***
 - Currency ***
+- Overlay on the ad-slots with details ***
 - bidder level configs
 -- FPD
 -- others
 - Copy Ad Creative
 - List of all loaded Modules
-- Overlay on the ad-slots with details ***
 - Floor data?
 - Bidder HTTP request-response
 - adRenderFailed event capture
