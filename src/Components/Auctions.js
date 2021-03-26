@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Auctions(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState('panel1');
   const {pbjsNamespace} = props;
 
   const handleChange = (panel) => (event, isExpanded) => {
