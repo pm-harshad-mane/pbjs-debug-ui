@@ -97,6 +97,21 @@
                 });
 
                 pbjs.setConfig({
+                    "currency": {
+                       "adServerCurrency": "JPY",
+                       "granularityMultiplier": 108,
+                       "rates": { "USD": { "JPY": 110.21 }}
+                    }
+                });
+
+                pbjs.setConfig({
+                    cache: {
+                        url: 'https://my-pbs.example.com/cache',
+                    ignoreBidderCacheKey: true
+                    }
+                });
+
+                pbjs.setConfig({
                   "schain": {
                     "validation": "strict",
                     "config": {

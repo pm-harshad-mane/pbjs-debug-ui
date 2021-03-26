@@ -158,6 +158,10 @@ export default function Config(props) {
     {tabTitle: "Auction Options", childComponent: createSyntaxHighlighter(pbjsConfig.auctionOptions)},
     {tabTitle: "Real Time Data", childComponent: createSyntaxHighlighter(pbjsConfig.realTimeData || {})},
     {tabTitle: "SCHAIN", childComponent: createSyntaxHighlighter(pbjsConfig.schain || {})},
+    {tabTitle: "Currency", childComponent: createSyntaxHighlighter(pbjsConfig.currency || {})},
+    {tabTitle: "Consent Management", childComponent: createSyntaxHighlighter(pbjsConfig.consentManagement || {})},
+    {tabTitle: "IAB Category Translation", childComponent: createSyntaxHighlighter(pbjsConfig.brandCategoryTranslation || {})},
+    {tabTitle: "Client-side Caching of VAST XML", childComponent: createSyntaxHighlighter(pbjsConfig.cache || {})},
     {tabTitle: "RAW JSON", childComponent: createSyntaxHighlighter(pbjsConfig)},
   ];
 
