@@ -60,20 +60,15 @@ function Row(props) {
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
-        </TableCell>      
+        </TableCell>
         <TableCell align="left">{row.bidderCode}</TableCell>
         <TableCell align="right">{row.cpm}</TableCell>
         <TableCell align="right">{row.timeToRespond}ms</TableCell>
-        <TableCell align="right">{row.size}</TableCell>
-        <TableCell align="right">{row.mediaType}</TableCell>
-        <TableCell align="right">{row.source}</TableCell>
-        <TableCell align="right">{row.statusMessage}</TableCell>
+        <TableCell align="center">{row.size}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={10}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-
               <Paper square className={classes.tabPanelRoot}>
                 <Tabs
                   value={tabValue}
@@ -115,7 +110,6 @@ function Row(props) {
                   </Paper>
                 </TabPanel>
               </Paper>                            
-            </Box>
           </Collapse>
         </TableCell>
       </TableRow>
@@ -151,10 +145,7 @@ export default function BidDetails(props) {
             <TableCell >Bidder</TableCell>
             <TableCell align="right">CPM</TableCell>
             <TableCell align="right">Latency</TableCell>
-            <TableCell align="right">Size</TableCell>
-            <TableCell align="right">MediaType</TableCell>
-            <TableCell align="right">Source</TableCell>            
-            <TableCell align="right">Message</TableCell>
+            <TableCell align="center">Size</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
