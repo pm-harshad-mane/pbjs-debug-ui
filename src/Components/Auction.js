@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Accordion, AccordionDetails, AccordionSummary, Typography, Paper, Tabs, Tab } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Typography, Paper, Tabs, Tab, List, ListItem, ListItemSecondaryAction, ListItemText, ListSubheader } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {TabPanel, a11yProps} from './TabPanel';
 import AdUnit from './AdUnit';
@@ -38,7 +38,20 @@ const useStyles = makeStyles((theme) => ({
   tabPanelRoot: {
     flexGrow: 1,
     maxHeight: '300px',
-    overflow: 'scroll'
+    overflow: 'scroll',
+    width: '100%',
+    padding: '0px'
+  },
+  auctionWrapper: {
+    width: '100%',
+  },
+  ListItem: {
+    paddingTop: '0px',
+    paddingBottom: '0px',
+
+    '& .MuiTypography-root': {
+      fontSize: 'inherit'
+    }    
   }
 }));
 
@@ -58,27 +71,35 @@ export default function Auction(props) {
     setTabValue(newValue);
   };
 
-  // return (    
+  function createSummaryList(){
 
-  //     <Accordion className={classes.Accordion} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-  //       <AccordionSummary
-  //         expandIcon={<ExpandMoreIcon />}
-  //         aria-controls="panel1bh-content"
-  //         id="panel1bh-header"
-  //         className={classes.summary}
-  //       >
-  //         <Typography className={classes.heading}>Auction {index}</Typography>
-  //         <Typography className={classes.secondaryHeading}></Typography>
-  //       </AccordionSummary>
-  //       <AccordionDetails className={classes.accordionDetails}>
-  //         Auctions go here....
-  //       </AccordionDetails>
-  //     </Accordion>
-  //     )
+    let auctionEndData = auctionData._end;
 
-  // {pbjsAdUnits.map((adUnit,index)=>{
-  //           return <AdUnit pbjsNamespace={pbjsNamespace} pbjsAdUnit={adUnit} key={adUnit.code} />
-  //         })}
+    let ListItemsData = [      
+      {title: 'Auction timeout', value: (auctionEndData.timeout) + 'ms'},
+      {title: 'Auction fiinished in', value: (auctionEndData.auctionEnd - auctionEndData.auctionStart) + 'ms'},
+      {title: 'Number of AdUnits', value: auctionEndData.adUnits.length},
+      {title: 'Total bid requests sent', value: auctionEndData.bidderRequests.length},
+      {title: 'Total bids received', value: auctionEndData.bidsReceived.length},
+      {title: 'Total no-bids received', value: auctionEndData.noBids.length},
+    ];
+
+    return(
+      <List>
+        {ListItemsData.map((listItem,index)=>{
+          return (
+            <ListItem className={classes.ListItem}>                  
+              <ListItemText primary={listItem.title} />
+              <ListItemSecondaryAction>
+                {listItem.value}
+              </ListItemSecondaryAction>
+            </ListItem>
+          )
+        })}
+      </List>
+    )
+  }
+
 
   return (
     <Paper square className={classes.tabPanelRoot}>
@@ -94,10 +115,10 @@ export default function Auction(props) {
         <Tab label="Ad-Units" {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={tabValue} index={0}>
-        Summary
+        {createSummaryList()}
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
-        <div className={classes.adUnitWrapper}>
+        <div className={classes.auctionWrapper}>
           {auctionData._end.adUnits.map((adUnit,index)=>{
             return <AdUnit pbjsNamespace={pbjsNamespace} pbjsAdUnit={adUnit} key={adUnit.code} />
           })}           
