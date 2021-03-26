@@ -16,8 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   Box: {
-    padding: '10px',
-    fontSize: '14px'
+    padding: '0px'
   }
 }));
 
