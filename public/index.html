@@ -95,6 +95,24 @@
                     enabled: true
                   }
                 });
+
+                pbjs.setConfig({
+                  "schain": {
+                    "validation": "strict",
+                    "config": {
+                      "ver":"1.0",
+                      "complete": 1,
+                      "nodes": [
+                        {
+                          "asi":"indirectseller.com",
+                          "sid":"00001",
+                          "hp":1
+                        }
+                      ]
+                    }
+                  }
+                });
+
                 pbjs.setConfig({
                     debug: true,
                     // consentManagement: {
