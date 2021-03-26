@@ -48,14 +48,13 @@ SyntaxHighlighter.registerLanguage('javascript', js);
 
 // ToDo:
 // check hard-coded ids
-// add tabs ui for user-friendly and raw JSON versio
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%'
   },
   Accordion: {
-    // backgroundColor: 'rgba(0, 0, 0, .03)',
+    backgroundColor: 'rgba(0, 0, 0, .03)',
     padding: '0px',
     width: '100%'
   }, 
@@ -90,7 +89,7 @@ export default function AdUnit(props) {
   const [pbjsAdUnitTargeting, setPbjsAdUnitTargeting] = React.useState({a: 'bb'});
   const [pbjsAdUnitBidResponses, setPbjsAdUnitBidResponses] = React.useState([]);
   // const [pbjsConfig, setPbjsConfig] = React.useState({debug: false});
-  const {pbjsNamespace, pbjsAdUnit} = props;
+  const {pbjsNamespace, pbjsAdUnit, auctionData} = props;
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -99,8 +98,6 @@ export default function AdUnit(props) {
         // window[pbjsNamespace].onEvent('auctionEnd', function(){
           const temp = window[pbjsNamespace].getAdserverTargetingForAdUnitCode(pbjsAdUnit.code);
           setPbjsAdUnitTargeting( temp );
-          // console.log('temp', temp);
-          // console.log('pbjsAdUnitTargeting', pbjsAdUnitTargeting);
           const bidResponses = window[pbjsNamespace].getBidResponses();          
           // setPbjsAdUnitBidResponses([...pbjsAdUnitBidResponses, ...bidResponses[pbjsAdUnit.code].bids]); // Merge
           setPbjsAdUnitBidResponses([...bidResponses[pbjsAdUnit.code].bids]); // Replace
@@ -141,11 +138,11 @@ export default function AdUnit(props) {
             >
               <Tab label="Bids" {...a11yProps(0)} />
               <Tab label="Media Types" {...a11yProps(1)} />
-              <Tab label="Bidder Params" {...a11yProps(2)} />
+              <Tab label="Targeting KVs" {...a11yProps(2)} />
             </Tabs>
 
             <TabPanel value={tabValue} index={0}>
-              <BidDetails bidResponses={pbjsAdUnitBidResponses} />
+              <BidDetails bidResponses={pbjsAdUnitBidResponses} pbjsAdUnit={pbjsAdUnit} />
             </TabPanel>
 
             <TabPanel value={tabValue} index={1}>
@@ -154,16 +151,12 @@ export default function AdUnit(props) {
               </SyntaxHighlighter>
             </TabPanel>
               
-            <TabPanel value={tabValue} index={2}>
-              These params are passed to bidder:
+            <TabPanel value={tabValue} index={2}>                
               <SyntaxHighlighter language="javascript" style={docco}>
-                {(JSON.stringify(pbjsAdUnit.bids, undefined, 4))}
+                {(JSON.stringify(auctionData._targeting[pbjsAdUnit.code] || {}, undefined, 4))}
               </SyntaxHighlighter>            
             </TabPanel>            
-
           </Paper>
-
-
         </AccordionDetails>
       </Accordion>
       )
