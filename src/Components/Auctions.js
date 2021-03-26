@@ -1,48 +1,12 @@
-/*
-	AdUnits:
-		AdUnit
-			Config-Details
-		Bids:
-			INDEX
-			Bidder
-			AdID
-			CPM
-			Message
-			Bid Details
-			Bidder Params passed
-			AdServerTargeting
-			Highest Bid ?
-			Rendered?
-			Latency	
-*/
-
-/*
-	UI
-	AdUnit Name {Accordion}
-		Panel 1: BIDS
-			Table
-				Index
-				AdID
-				Bidder
-				CPM 
-				Message
-		Panel N: AdServer Targeting
-		Panel 3: AdUnit Config
-			Code Block
-		Panel 3: Bidder Params
-			Code Block per bidder
-*/
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Typography, Paper, Tabs, Tab } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import AdUnit from './AdUnit';
-
+import {TabPanel, a11yProps} from './TabPanel';
+import Auction from './Auction';
 
 // ToDo:
-// check hard-coded ids
-// add tabs ui for user-friendly and raw JSON versio
+// Check hard-coded ids
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
-    flexShrink: 0,    
+    flexShrink: 0,
     color: '#ff6f00',
     fontWeight: 'bold'    
   },
@@ -66,26 +30,24 @@ const useStyles = makeStyles((theme) => ({
   accordionDetails: {
     padding: '0px'
   },
-  adUnitWrapper: {
+  tabPanelRoot: {
+    flexGrow: 1,
+    maxHeight: '300px',
+    overflow: 'scroll'
+  },
+
+  auctionWrapper: {
     width: '100%',
   }
 }));
 
-export default function AdUnits(props) {
+export default function Auctions(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [displayed, setDisplayed] = React.useState(false);
-  const [pbjsAdUnits, setPbjsAdUnits] = React.useState([]);
   const {pbjsNamespace} = props;
 
   const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-    if(isExpanded && !displayed){
-      window[pbjsNamespace].que.push(function(){        
-        setPbjsAdUnits(window[pbjsNamespace].adUnits);
-        setDisplayed(true);
-      });
-    }
+    setExpanded(isExpanded ? panel : false);    
   };
 
   const [tabValue, setTabValue] = React.useState(0);
@@ -94,8 +56,8 @@ export default function AdUnits(props) {
     setTabValue(newValue);
   };
 
-  // todo: change panel1 name
-  return (
+  return (    
+
       <Accordion className={classes.Accordion} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -103,15 +65,27 @@ export default function AdUnits(props) {
           id="panel1bh-header"
           className={classes.summary}
         >
-          <Typography className={classes.heading}>AdUnits</Typography>
+          <Typography className={classes.heading}>Auctions</Typography>
           <Typography className={classes.secondaryHeading}></Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
-          <div className={classes.adUnitWrapper}>
-          	{pbjsAdUnits.map((adUnit,index)=>{
-    				  return <AdUnit pbjsNamespace={pbjsNamespace} pbjsAdUnit={adUnit} key={adUnit.code} />
-    	     	})}          	
-          </div>
+          <Paper square className={classes.tabPanelRoot}>
+            <Tabs
+              value={tabValue}
+              indicatorColor="primary"
+              textColor="primary"
+              onChange={handleTabChange}
+              variant="scrollable"
+              scrollButtons="auto"
+            >              
+              {window[pbjsNamespace]._pbjsDebugUI._auctions.map((auction,index)=>{
+                return <Tab label={"Auction " + (index+1)} {...a11yProps(index)} />
+              })}           
+            </Tabs>
+            {window[pbjsNamespace]._pbjsDebugUI._auctions.map((auction,index)=>{
+              return <TabPanel value={tabValue} index={index}><Auction pbjsNamespace={pbjsNamespace} auctionData={auction} key={auction.auctionId} /></TabPanel>
+            })}            
+          </Paper>
         </AccordionDetails>
       </Accordion>
       )

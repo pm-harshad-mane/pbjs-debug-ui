@@ -2,13 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import AccUI from './AccUI';
 import Config from './Config';
-import AdUnits from './AdUnits';
 import UserIds from './UserIds';
 import Errors from './Errors';
 import TCF2 from './TCF2';
 import FPD from './FPD';
+import Auctions from './Auctions';
 
 // ToDo:
 // check hard-coded ids
@@ -65,7 +64,7 @@ export default function ControlledAccordions(props) {
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
           <div className={classes.root}>
-            <AdUnits pbjsNamespace={pbjsNamespace} />
+            <Auctions pbjsNamespace={pbjsNamespace} />
             <UserIds pbjsNamespace={pbjsNamespace} />
             <Config pbjsNamespace={pbjsNamespace} />
             <FPD pbjsNamespace={pbjsNamespace} />
