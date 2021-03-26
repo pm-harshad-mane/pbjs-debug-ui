@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ControlledAccordions(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState('panel1');
   const {pbjsNamespace} = props;
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -66,8 +66,8 @@ export default function ControlledAccordions(props) {
           <div className={classes.root}>
             <Auctions pbjsNamespace={pbjsNamespace} />
             <UserIds pbjsNamespace={pbjsNamespace} />
-            <Config pbjsNamespace={pbjsNamespace} />
             <FPD pbjsNamespace={pbjsNamespace} />
+            <Config pbjsNamespace={pbjsNamespace} />            
             <TCF2 pbjsNamespace={pbjsNamespace} />
             <Errors pbjsNamespace={pbjsNamespace} />
           </div>
