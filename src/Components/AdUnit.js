@@ -70,7 +70,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   accordionDetails: {
-    padding: '0px'
+    padding: '0px',
+    minHeight: '300px'
   },
   tabPanelRoot: {
     // flexGrow: 1

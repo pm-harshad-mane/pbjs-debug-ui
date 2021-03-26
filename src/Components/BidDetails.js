@@ -22,6 +22,7 @@ SyntaxHighlighter.registerLanguage('xml', xml);
 
 const useRowStyles = makeStyles({
   root: {
+    width: '100%',
     '& > *': {
       borderBottom: 'unset',
     },
@@ -38,13 +39,15 @@ const useRowStyles = makeStyles({
     }
   },
   editor: {
+    flexGrow: 1,
     width: '100%',
-    overflow: 'scroll'
+    overflow: 'scroll',
+    maxHeight: '270px',
   }
 });
 
 function Row(props) {
-  const { row } = props; // row ==> bid
+  const { row, pbjsAdUnit } = props; // row ==> bid
   const [open, setOpen] = React.useState(false);
   // const [ ad, setAd ] = React.useState('');
   const classes = useRowStyles();
@@ -52,6 +55,8 @@ function Row(props) {
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
+
+  let bidderReceivedInfo = pbjsAdUnit.bids.find(bid => bid.bidder === row.bidderCode) || {};
 
   return (
     <React.Fragment>
@@ -66,34 +71,27 @@ function Row(props) {
         <TableCell align="right">{row.timeToRespond}ms</TableCell>
         <TableCell align="center">{row.size}</TableCell>
       </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-              <Paper square className={classes.tabPanelRoot}>
+      <TableRow  className={classes.root}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0, width: '100%'}} colSpan={10}>
+          <Collapse in={open} timeout="auto" unmountOnExit style={{width: '100%'}}>
                 <Tabs
+                  centered
                   value={tabValue}
                   indicatorColor="primary"
                   textColor="primary"
                   onChange={handleTabChange}
-                  aria-label="disabled tabs example"
-                  variant="fullWidth"
+                  style={{width: '100%'}}
                 >
-                  <Tab label="Bidder Params" {...a11yProps(0)} />
-                  <Tab label="Targeting" {...a11yProps(1)} />
-                  <Tab label="Bid Details" {...a11yProps(2)} />
-                  <Tab label="Ad Creative" {...a11yProps(3)} />
+                  <Tab label="Bidder received data" {...a11yProps(0)} />
+                  <Tab label="Bid Details" {...a11yProps(1)} />
+                  <Tab label="Ad Creative" {...a11yProps(2)} />
                 </Tabs>
-                <TabPanel value={tabValue} index={0}>
-                  <SyntaxHighlighter language="json" style={docco}>
-                    {(JSON.stringify(row.params || {err: "params not found"}, undefined, 4))}
+                <TabPanel value={tabValue} index={0} style={{width: '700px'}}>
+                  <SyntaxHighlighter language="json" wrapLongLines={true} style={docco} className={classes.editor}>
+                    {(JSON.stringify(bidderReceivedInfo, undefined, 4))}
                   </SyntaxHighlighter>
                 </TabPanel>
-                <TabPanel value={tabValue} index={1}>
-                  <SyntaxHighlighter language="json" style={docco}>
-                    {(JSON.stringify(row.adserverTargeting, undefined, 4))}
-                  </SyntaxHighlighter>
-                </TabPanel>
-                <TabPanel value={tabValue} index={2}>
+                <TabPanel value={tabValue} index={1} style={{width: '700px'}}>
                   <SyntaxHighlighter language="json" wrapLongLines={true} style={docco}>
                     {(JSON.stringify((function(){
                       const rowCopy = Object.assign({}, row);
@@ -102,14 +100,11 @@ function Row(props) {
                     })(), undefined, 4))}
                   </SyntaxHighlighter>
                 </TabPanel>
-                <TabPanel value={tabValue} index={3}>
-                  <Paper square className={classes.tabPanelRoot}>
+                <TabPanel value={tabValue} index={2} style={{width: '700px'}}>
                   <SyntaxHighlighter language="xml" wrapLongLines={true} style={docco} >                    
                     {beautify_html(row.ad.replace(/></g, '>\n<'))}
                   </SyntaxHighlighter>
-                  </Paper>
                 </TabPanel>
-              </Paper>                            
           </Collapse>
         </TableCell>
       </TableRow>
@@ -134,7 +129,7 @@ const tableClasses = makeStyles({
 
 export default function BidDetails(props) {
   const classes = tableClasses();
-  const {bidResponses} = props;
+  const {bidResponses, pbjsAdUnit} = props;
 
   return (
     <TableContainer component={Paper} className={classes.root}>
@@ -150,7 +145,7 @@ export default function BidDetails(props) {
         </TableHead>
         <TableBody>
           {bidResponses.map((bid) => (
-            <Row key={bid.adId} row={bid} />
+            <Row key={bid.adId} row={bid} pbjsAdUnit={pbjsAdUnit} />
           ))}
         </TableBody>
       </Table>
