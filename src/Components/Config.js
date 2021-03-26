@@ -14,7 +14,6 @@ SyntaxHighlighter.registerLanguage('javascript', js);
 
 // ToDo:
 // check hard-coded ids
-// Add SCHAIN
 
 const useStyles = makeStyles((theme) => ({
   root: {
