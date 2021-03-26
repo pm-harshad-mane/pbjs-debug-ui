@@ -3,17 +3,17 @@ TODO:
 
 MVP
 - Auction wise data presentation
-- New auctions should be added as are completed
-- stop updating data on expand
-
-- Error logs
--- Data needs to be updated in UI as new data is added to arary
--- what is the first entry with no data
-
+- Auction Summary
+-- DONE
 - Mark auction winner, rendered bid?
 - No bids
 - AdUnit summary info
 - AdUnit targeting
+-- DONE
+
+- Error logs
+-- Data needs to be updated in UI as new data is added to arary
+-- what is the first entry with no data
 
 - change in PBJS module to gather targeting info
 -- DONE
@@ -30,6 +30,8 @@ MVP
 - FPD
 -- DONE
 
+- Stop updating data on expand
+- New auctions should be added as are completed
 - Demo with a live pub
 - CSS fixes
 - Versioning of the UI lib?
