@@ -10,11 +10,13 @@ MVP
 -- Data needs to be updated in UI as new data is added to arary
 -- what is the first entry with no data
 
-- Mark auction winner, rendered bid
+- Mark auction winner, rendered bid?
 - No bids
 - AdUnit summary info
 - AdUnit targeting
--- change in PBJS module to gather this info
+
+- change in PBJS module to gather targeting info
+-- DONE
 
 - Revamp Config panel with Vertical tabs
 -- S2S Config
@@ -34,9 +36,9 @@ MVP
 
 ===================
 
-Next Release
-- bidTimeout***
-- Currency
+Next Releases
+- bidTimeout ***
+- Currency ***
 - bidder level configs
 -- FPD
 -- others
