@@ -105,17 +105,6 @@ export default function Config(props) {
     setTabValue(newValue);
   };
 
-// todo: use array.map tp cretae the repeating components
-
-  let ListItemsData = [
-    {title: 'Prebid Version', value: pbjsVersion},
-    {title: 'Bidder Timeout', value: pbjsConfig.bidderTimeout+'ms'},
-    {title: 'Enable Send All Bids', value: pbjsConfig.enableSendAllBids ? 'true' : 'false'},
-    {title: 'Use Bid Cache', value: pbjsConfig.useBidCache ? 'true' : 'false'},
-    {title: 'COPPA', value: pbjsConfig.coppa ? 'true' : 'false'},
-    {title: 'Price Granularity', value: pbjsConfig.priceGranularity},
-  ];
-
   function createTab(index, childComponent){
     return(
       <TabPanel value={tabValue} index={index} className={classes.verticalTabsTabPanel}>
@@ -125,6 +114,15 @@ export default function Config(props) {
   }
 
   function createBasicList(){
+    let ListItemsData = [
+      {title: 'Prebid Version', value: pbjsVersion},
+      {title: 'Bidder Timeout', value: pbjsConfig.bidderTimeout+'ms'},
+      {title: 'Enable Send All Bids', value: pbjsConfig.enableSendAllBids ? 'true' : 'false'},
+      {title: 'Use Bid Cache', value: pbjsConfig.useBidCache ? 'true' : 'false'},
+      {title: 'COPPA', value: pbjsConfig.coppa ? 'true' : 'false'},
+      {title: 'Price Granularity', value: pbjsConfig.priceGranularity},
+    ];
+
     return(
       <List>
         {ListItemsData.map((listItem,index)=>{
@@ -152,9 +150,6 @@ export default function Config(props) {
   function createTitleTab(title, index){
     return <Tab label={title} {...a11yProps({index})} className={classes.verticalTabsLabel} />    
   }
-
-  let title = "Basic *";
-  let index = 0;
 
   let theTabs = [
     {tabTitle: "Basic *", childComponent: createBasicList()},
