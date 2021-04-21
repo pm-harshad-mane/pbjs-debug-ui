@@ -102,7 +102,7 @@ export default function AdUnit(props) {
           const bidResponses = window[pbjsNamespace].getBidResponses();          
           // setPbjsAdUnitBidResponses([...pbjsAdUnitBidResponses, ...bidResponses[pbjsAdUnit.code].bids]); // Merge
           setPbjsAdUnitBidResponses([...bidResponses[pbjsAdUnit.code].bids]); // Replace
-          console.log('pbjsAdUnitBidResponses', pbjsAdUnitBidResponses)
+          console.log('pbjsAdUnitBidResponses', pbjsAdUnitBidResponses);
           setDisplayed(true);
         // });
       });
