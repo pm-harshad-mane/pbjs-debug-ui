@@ -37,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
   },
   tabPanelRoot: {
     flexGrow: 1,
-    maxHeight: '300px',
-    overflow: 'scroll',
+    // maxHeight: '300px',
+    // overflow: 'scroll',
     width: '100%',
     padding: '0px'
   },
@@ -79,7 +79,7 @@ export default function Auction(props) {
       {title: 'Auction timeout', value: (auctionEndData.timeout) + 'ms'},
       {title: 'Auction fiinished in', value: (auctionEndData.auctionEnd - auctionEndData.auctionStart) + 'ms'},
       {title: 'Number of AdUnits', value: auctionEndData.adUnits.length},
-      {title: 'Total bid requests sent', value: auctionEndData.bidderRequests.length},
+      {title: 'Total requests sent by bidders', value: auctionEndData.bidderRequests.length},
       {title: 'Total bids received', value: auctionEndData.bidsReceived.length},
       {title: 'Total no-bids received', value: auctionEndData.noBids.length},
     ];
