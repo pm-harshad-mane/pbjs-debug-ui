@@ -154,7 +154,7 @@ export default function AdUnit(props) {
               
             <TabPanel value={tabValue} index={2}>                
               <SyntaxHighlighter language="javascript" style={docco}>
-                {(JSON.stringify(auctionData._targeting[pbjsAdUnit.code] || {}, undefined, 4))}
+                {(JSON.stringify((auctionData._targeting ? auctionData._targeting[pbjsAdUnit.code] || {} : {}), undefined, 4))}
               </SyntaxHighlighter>            
             </TabPanel>            
           </Paper>
