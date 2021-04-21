@@ -2,14 +2,17 @@ TODO:
 
 
 MVP
+- pbjs module: remove auction init handler
 - Auction wise data presentation
-- Auction Summary
--- DONE
-- Mark auction winner, rendered bid?
-- No bids
+- Mark Auction winner, 
+- Mark Rendered bid?
+- No bids?
 - AdUnit summary info
 - AdUnit targeting
 -- DONE
+- Auction Summary
+-- DONE
+
 
 - Error logs
 -- Data needs to be updated in UI as new data is added to arary
