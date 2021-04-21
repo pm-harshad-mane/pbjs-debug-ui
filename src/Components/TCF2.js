@@ -65,7 +65,7 @@ export default function TCF2(props) {
         <AccordionDetails className={classes.accordionDetails}>
           <Paper square className={classes.tabPanelRoot}>
             <SyntaxHighlighter language="javascript" style={docco}>
-                {(JSON.stringify(window[pbjsNamespace]._pbjsDebugUI._tcf2Enforcement, undefined, 4))}
+                {(JSON.stringify(window[pbjsNamespace]._pbjsDebugUI._tcf2Enforcement || {}, undefined, 4))}
               </SyntaxHighlighter> 
             </Paper>
         </AccordionDetails>

@@ -60,12 +60,12 @@ export default function Errors(props) {
           className={classes.summary}
         >
           <Typography className={classes.heading}>Errors</Typography>
-          <Typography className={classes.secondaryHeading}>{window[pbjsNamespace]._pbjsDebugUI._debug.length}</Typography>
+          <Typography className={classes.secondaryHeading}>{(window[pbjsNamespace]._pbjsDebugUI._debug ? window[pbjsNamespace]._pbjsDebugUI._debug.length : 0)}</Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
           <Paper square className={classes.tabPanelRoot}>
             <SyntaxHighlighter language="javascript" style={docco}>
-                {(JSON.stringify(window[pbjsNamespace]._pbjsDebugUI._debug, undefined, 4))}
+                {(JSON.stringify(window[pbjsNamespace]._pbjsDebugUI._debug||[], undefined, 4))}
               </SyntaxHighlighter> 
             </Paper>
         </AccordionDetails>

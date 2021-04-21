@@ -141,7 +141,7 @@ export default function Config(props) {
   function createSyntaxHighlighter(data){
     return(
       <SyntaxHighlighter language="javascript" style={docco} wrapLongLines={true} className={classes.tabPanelRootForEditor}>
-        {(JSON.stringify(data, undefined, 4))}
+        {(JSON.stringify(data || {}, undefined, 4))}
       </SyntaxHighlighter>
     );
   }

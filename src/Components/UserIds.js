@@ -114,7 +114,7 @@ export default function UserIds(props) {
               <Paper square className={classes.tabPanelRoot}>
                 Generated IDs in ORTB EIDs format
                 <SyntaxHighlighter language="javascript" style={docco}>
-                    {(JSON.stringify(pbjsUserIds, undefined, 4))}
+                    {(JSON.stringify(pbjsUserIds||{}, undefined, 4))}
                   </SyntaxHighlighter>                      
               </Paper>
             </TabPanel>
