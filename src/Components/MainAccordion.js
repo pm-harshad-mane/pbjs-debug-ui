@@ -60,7 +60,7 @@ export default function ControlledAccordions(props) {
           className={classes.summary}
         >
           <Typography className={classes.heading}>PrebidJS Debug UI</Typography>
-          <Typography className={classes.secondaryHeading}>Powered by Harshad Mane</Typography>
+          <Typography className={classes.secondaryHeading}>Powered by PubMatic</Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
           <div className={classes.root}>
