@@ -87,26 +87,13 @@ export default function AdUnit(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [displayed, setDisplayed] = React.useState(false);
-  const [pbjsAdUnitTargeting, setPbjsAdUnitTargeting] = React.useState({a: 'bb'});
-  const [pbjsAdUnitBidResponses, setPbjsAdUnitBidResponses] = React.useState([]);
-  // const [pbjsConfig, setPbjsConfig] = React.useState({debug: false});
   const {pbjsNamespace, pbjsAdUnit, auctionData} = props;
+  const auctionEndData = auctionData._end;
+  const allBidresponses = auctionEndData.bidsReceived;
+  const pbjsAdUnitBidResponses = allBidresponses.filter(bid => bid.adUnitCode === pbjsAdUnit.code).sort(function(a, b){return b.cpm-a.cpm});
 
   const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-    if(isExpanded /*&& !displayed*/){
-      window[pbjsNamespace].que.push(function(){
-        // window[pbjsNamespace].onEvent('auctionEnd', function(){
-          const temp = window[pbjsNamespace].getAdserverTargetingForAdUnitCode(pbjsAdUnit.code);
-          setPbjsAdUnitTargeting( temp );
-          const bidResponses = window[pbjsNamespace].getBidResponses();          
-          // setPbjsAdUnitBidResponses([...pbjsAdUnitBidResponses, ...bidResponses[pbjsAdUnit.code].bids]); // Merge
-          setPbjsAdUnitBidResponses([...bidResponses[pbjsAdUnit.code].bids]); // Replace
-          console.log('pbjsAdUnitBidResponses', pbjsAdUnitBidResponses);
-          setDisplayed(true);
-        // });
-      });
-    }
+    setExpanded(isExpanded ? panel : false);    
   };
 
   const [tabValue, setTabValue] = React.useState(0);
