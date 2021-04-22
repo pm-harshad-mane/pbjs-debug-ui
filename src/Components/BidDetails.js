@@ -66,8 +66,8 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell align="left">{row.bidderCode}</TableCell>
-        <TableCell align="right">{row.cpm}</TableCell>
+        <TableCell align="left">{row.bidderCode + (row.source === "s2s"? " (s2s)" : "")}</TableCell>
+        <TableCell align="right">{(row.cpm||0).toFixed(2)}</TableCell>
         <TableCell align="right">{row.timeToRespond}ms</TableCell>
         <TableCell align="center">{row.size}</TableCell>
       </TableRow>
@@ -130,6 +130,8 @@ const tableClasses = makeStyles({
 export default function BidDetails(props) {
   const classes = tableClasses();
   const {bidResponses, pbjsAdUnit} = props;
+
+  // sort bidResponses by cpm
 
   return (
     <TableContainer component={Paper} className={classes.root}>
