@@ -82,6 +82,8 @@ export default function Auction(props) {
       {title: 'Total requests sent by bidders', value: auctionEndData.bidderRequests.length},
       {title: 'Total bids received', value: auctionEndData.bidsReceived.length},
       {title: 'Total no-bids received', value: auctionEndData.noBids.length},
+      {title: 'Total bids won/rendered', value: (auctionData._bidsWon ? Object.keys(auctionData._bidsWon).length : 0)},
+
     ];
 
     return(

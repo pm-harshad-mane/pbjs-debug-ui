@@ -130,7 +130,7 @@ export default function AdUnit(props) {
             </Tabs>
 
             <TabPanel value={tabValue} index={0}>
-              <BidDetails bidResponses={pbjsAdUnitBidResponses} pbjsAdUnit={pbjsAdUnit} />
+              <BidDetails bidResponses={pbjsAdUnitBidResponses} pbjsAdUnit={pbjsAdUnit} auctionData={auctionData} />
             </TabPanel>
 
             <TabPanel value={tabValue} index={1}>

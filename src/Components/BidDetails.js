@@ -47,7 +47,7 @@ const useRowStyles = makeStyles({
 });
 
 function Row(props) {
-  const { row, pbjsAdUnit } = props; // row ==> bid
+  const { row, pbjsAdUnit, bidWon } = props; // row ==> bid
   const [open, setOpen] = React.useState(false);
   // const [ ad, setAd ] = React.useState('');
   const classes = useRowStyles();
@@ -66,7 +66,7 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell align="left">{row.bidderCode + (row.source === "s2s"? " (s2s)" : "")}</TableCell>
+        <TableCell align="left">{row.bidderCode + (row.source === "s2s"? " (s2s)" : "") + (bidWon ? " (won)" : "")}</TableCell>
         <TableCell align="right">{(row.cpm||0).toFixed(2)}</TableCell>
         <TableCell align="right">{row.timeToRespond}ms</TableCell>
         <TableCell align="center">{row.size}</TableCell>
@@ -129,7 +129,9 @@ const tableClasses = makeStyles({
 
 export default function BidDetails(props) {
   const classes = tableClasses();
-  const {bidResponses, pbjsAdUnit} = props;
+  const {bidResponses, pbjsAdUnit, auctionData} = props;
+
+  const auctionBidsWon = auctionData._bidsWon || {};
 
   // sort bidResponses by cpm
 
@@ -147,7 +149,7 @@ export default function BidDetails(props) {
         </TableHead>
         <TableBody>
           {bidResponses.map((bid) => (
-            <Row key={bid.adId} row={bid} pbjsAdUnit={pbjsAdUnit} />
+            <Row key={bid.adId} row={bid} pbjsAdUnit={pbjsAdUnit} bidWon={auctionBidsWon.hasOwnProperty(bid.adId)} />
           ))}
         </TableBody>
       </Table>
