@@ -4,6 +4,7 @@ import './index.css';
 import App from './App/App';
 
 // document.addEventListener("DOMContentLoaded", function(){
+setTimeout(function(){
 	const APP_UI_DIV_ID = "pbjs-debug-ui";
 	const PBJS_NAMESPACE = window.PBJS_NAMESPACE || "pbjs";
 	let div = document.createElement('div');
@@ -24,5 +25,5 @@ import App from './App/App';
 	  </div>,
 	  document.getElementById(APP_UI_DIV_ID)
 	);
+}, 5000);
 // });
-
