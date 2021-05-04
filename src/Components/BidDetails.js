@@ -74,8 +74,7 @@ function Row(props) {
       <TableRow  className={classes.root}>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0, width: '100%'}} colSpan={10}>
           <Collapse in={open} timeout="auto" unmountOnExit style={{width: '100%'}}>
-                <Tabs
-                  centered
+                <Tabs                  
                   value={tabValue}
                   indicatorColor="primary"
                   textColor="primary"
