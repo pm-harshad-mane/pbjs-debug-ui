@@ -59,7 +59,7 @@ export default function Errors(props) {
           id="panel1bh-header"
           className={classes.summary}
         >
-          <Typography className={classes.heading}>Errors</Typography>
+          <Typography className={classes.heading}>Errors and Warnings</Typography>
           <Typography className={classes.secondaryHeading}>{(window[pbjsNamespace]._pbjsDebugUI._debug ? window[pbjsNamespace]._pbjsDebugUI._debug.length : 0)}</Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
