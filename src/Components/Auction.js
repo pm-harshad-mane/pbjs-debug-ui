@@ -71,19 +71,24 @@ export default function Auction(props) {
     setTabValue(newValue);
   };
 
+  function getUniqueBiddersInAuction(auctionEndData){
+    return auctionEndData.bidderRequests.map(item => item.bidderCode).filter((value, index, self) => self.indexOf(value) === index).sort()
+  }
+
   function createSummaryList(){
 
     let auctionEndData = auctionData._end;
+    let uniqueBidders = getUniqueBiddersInAuction(auctionEndData);
 
     let ListItemsData = [      
       {title: 'Auction timeout', value: (auctionEndData.timeout) + 'ms'},
       {title: 'Auction fiinished in', value: (auctionEndData.auctionEnd - auctionEndData.auctionStart) + 'ms'},
       {title: 'Number of AdUnits', value: auctionEndData.adUnits.length},
+      {title: 'Number of Bidders', value: uniqueBidders.length},
       {title: 'Total requests sent by bidders', value: auctionEndData.bidderRequests.length},
       {title: 'Total bids received', value: auctionEndData.bidsReceived.length},
       {title: 'Total no-bids received', value: auctionEndData.noBids.length},
       {title: 'Total bids won/rendered', value: (auctionData._bidsWon ? Object.keys(auctionData._bidsWon).length : 0)},
-
     ];
 
     return(
