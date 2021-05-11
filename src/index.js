@@ -25,5 +25,10 @@ setTimeout(function(){
 	  </div>,
 	  document.getElementById(APP_UI_DIV_ID)
 	);
+
+	// need to change the maxHeight of App.js component
+	window.addEventListener('resize', function(){
+    	document.querySelector("#pbjs-debug-ui div div").style.maxHeight = (window.innerHeight - 50) + 'px';
+	});
 }, 5000);
 // });

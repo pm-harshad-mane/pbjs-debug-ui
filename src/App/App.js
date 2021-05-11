@@ -10,8 +10,14 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     top: '5px',
     right: '5px',
-    padding: '0px',
-    zIndex: '2147483648'// set to max; observed max is 999999
+    // padding: '0px',
+    zIndex: '2147483648',// set to max; observed max is 999999
+    maxHeight: (window.innerHeight - 50) + 'px',
+    overflowY: 'scroll',
+    margin: '0px -32px',
+    padding: '0px 32px',
+    marginBottom: '-32px',
+    paddingBottom: '32px'
   }
 }));
 
