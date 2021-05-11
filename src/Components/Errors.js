@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Accordion, AccordionDetails, AccordionSummary, Typography, Paper } from '@material-ui/core';
+import { Accordion, AccordionDetails, AccordionSummary, Typography, Paper, Tabs, Tab } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {TabPanel, a11yProps} from './TabPanel';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -41,6 +42,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+function getLogs(pbjsNamespace, typeOfLog){
+  if(window[pbjsNamespace]._pbjsDebugUI._debug){
+    return window[pbjsNamespace]._pbjsDebugUI._debug.filter(e => e.type === typeOfLog).map(e => e.arguments);
+  }
+  return [];
+}
+
 export default function Errors(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -48,6 +56,12 @@ export default function Errors(props) {
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);    
+  };
+
+  const [tabValue, setTabValue] = React.useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
   };
 
   return (    
@@ -60,14 +74,36 @@ export default function Errors(props) {
           className={classes.summary}
         >
           <Typography className={classes.heading}>Errors and Warnings</Typography>
-          <Typography className={classes.secondaryHeading}>{(window[pbjsNamespace]._pbjsDebugUI._debug ? window[pbjsNamespace]._pbjsDebugUI._debug.length : 0)}</Typography>
+          <Typography className={classes.secondaryHeading}></Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
           <Paper square className={classes.tabPanelRoot}>
-            <SyntaxHighlighter language="javascript" style={docco}>
-                {(JSON.stringify(window[pbjsNamespace]._pbjsDebugUI._debug||[], undefined, 4))}
-              </SyntaxHighlighter> 
-            </Paper>
+            <Tabs
+              value={tabValue}
+              indicatorColor="primary"
+              textColor="primary"
+              onChange={handleTabChange}
+              aria-label="disabled tabs example"
+              variant="fullWidth"
+            >
+              <Tab label="Errors" {...a11yProps(0)} />
+              <Tab label="Warnings" {...a11yProps(1)} />
+            </Tabs>
+            <TabPanel value={tabValue} index={0}>
+              <Paper square className={classes.tabPanelRoot}>
+                <SyntaxHighlighter language="javascript" style={docco}>
+                  {(JSON.stringify(getLogs(pbjsNamespace, "ERROR"), undefined, 4))}
+                </SyntaxHighlighter>
+              </Paper>
+            </TabPanel>
+            <TabPanel value={tabValue} index={1}>            
+              <Paper square className={classes.tabPanelRoot}>
+                <SyntaxHighlighter language="javascript" style={docco}>
+                    {(JSON.stringify(getLogs(pbjsNamespace, "WARNING"), undefined, 4))}
+                  </SyntaxHighlighter>                      
+              </Paper>
+            </TabPanel>            
+          </Paper>
         </AccordionDetails>
       </Accordion>
       )
