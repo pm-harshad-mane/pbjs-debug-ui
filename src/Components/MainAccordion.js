@@ -8,6 +8,7 @@ import Errors from './Errors';
 import TCF2 from './TCF2';
 import FPD from './FPD';
 import Auctions from './Auctions';
+import ListOfModules from './ListOfModules';
 
 // ToDo:
 // check hard-coded ids
@@ -70,6 +71,7 @@ export default function ControlledAccordions(props) {
             <Config pbjsNamespace={pbjsNamespace} />            
             <TCF2 pbjsNamespace={pbjsNamespace} />
             <Errors pbjsNamespace={pbjsNamespace} />
+            <ListOfModules pbjsNamespace={pbjsNamespace} />            
           </div>
         </AccordionDetails>
       </Accordion>
