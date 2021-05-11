@@ -65,7 +65,9 @@ export default function UserIds(props) {
             return prev  
         }, {});
         setPbjsConfig(displayPbjsConfig);
-        setPbjsUserIds([...window[pbjsNamespace].getUserIdsAsEids()]);
+        if(typeof window[pbjsNamespace].getUserIdsAsEids === "function"){
+          setPbjsUserIds([...window[pbjsNamespace].getUserIdsAsEids()]);  
+        }        
         setDisplayed(true);
       });
     }
