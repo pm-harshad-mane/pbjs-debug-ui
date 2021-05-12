@@ -49,7 +49,7 @@ function getListOfModules(pbjsNamespace){
       return window[pbjsNamespace].installedModules.sort();
     }
   } else {
-    return ["The list of modules is populated from Prebid JS Version 4.37+"];
+    return ["The list of modules is populated from Prebid JS Version 4.36+"];
   }
 }
 
